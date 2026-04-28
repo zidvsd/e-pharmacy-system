@@ -18,19 +18,38 @@ public class DataStore {
         {"u006", "patient2",  "pass123", "patient", "Maria Santos"},
         {"u007", "pharmacist1",  "pass123", "pharmacist", "Pharmacist John"},
     };
-     
+    
     String[][] patients = new String[50][9];
     int patientCount = 0;
     
-  String[][] prescriptions = new String[100][9];
+    String[][] prescriptions = new String[100][9];
     int prescriptionCount = 0;
  
-     String[][] orders = new String[100][7];
+    String[][] orders = new String[100][7];
     int orderCount = 0;
  
-     int patientIdCounter     = 1;
-    int prescriptionIdCounter= 1;
-    int orderIdCounter       = 1;
- 
+    String[][] medicines = new String[100][7];
+    int medicineCount = 0;
+    
+    // ID Counters
+    int patientIdCounter      = 1;
+    int prescriptionIdCounter = 1;
+    int orderIdCounter        = 1;
+    int medicineIdCounter     = 1;
+    
+    // Constructor - Initialize sample data
+    public DataStore() {
+        initializeSampleMedicines();
+    }
+    
+    // Initialize sample medicines for testing
+    private void initializeSampleMedicines() {
+        medicines[0] = new String[]{"MED001", "Aspirin", "100", "5.50", "2026-12-31", "Bayer Inc", "Pain reliever & fever reducer"};
+        medicines[1] = new String[]{"MED002", "Paracetamol", "150", "3.25", "2027-06-30", "GSK", "Acetaminophen - fever & pain"};
+        medicines[2] = new String[]{"MED003", "Amoxicillin", "80", "12.00", "2026-08-15", "Pfizer", "Antibiotic - bacterial infections"};
+        medicines[3] = new String[]{"MED004", "Ibuprofen", "120", "4.75", "2027-03-20", "Johnson & Johnson", "Anti-inflammatory pain reliever"};
+        medicineCount = 4;
+        medicineIdCounter = 5;
+    }
 }
 
