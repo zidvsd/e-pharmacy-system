@@ -9,31 +9,8 @@ package epharmacysystem;
  * @author Zid
  */
 public class LoginFrame extends javax.swing.JFrame {
-     String[][] users = {
-        {"u001", "drjuan",   "pass123", "doctor",  "Dr. Juan Santos"},
-        {"u002", "drmarla",  "pass123", "doctor",  "Dr. Marla Reyes"},
-        {"u003", "nurseana", "pass123", "nurse",   "Nurse Ana Cruz"},
-        {"u004", "nursebob", "pass123", "nurse",   "Nurse Bob Lim"},
-        {"u005", "patient1", "pass123", "patient", "Juan Dela Cruz"},
-        {"u006", "patient2", "pass123", "patient", "Maria Santos"},
-             {"u007", "pharmacist1", "pass123", "pharmacist", "Pharmacist John Doe"}
-    };
-     
-     String[][] patients = new String[50][9];
-    int patientCount = 0;
-
-    // prescription data
-    String[][] prescriptions = new String[100][9];
-    int prescriptionCount = 0;
-
-    // order data
-    String[][] orders = new String[100][7];
-    int orderCount = 0;
-
-    // id counters
-    int patientIdCounter      = 1;
-    int prescriptionIdCounter = 1;
-    int orderIdCounter        = 1;
+    DataStore userData = new DataStore();
+   
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginFrame.class.getName());
 
@@ -42,26 +19,7 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
-        patients[0] = new String[]{"p001","Juan Dela Cruz","45","ICU","Hypertension","Penicillin","u001","09171234567","Calamba, Laguna"};
-    patients[1] = new String[]{"p002","Maria Santos","32","General","Pneumonia","None","u001","09289876543","Los Banos, Laguna"};
-    patients[2] = new String[]{"p003","Pedro Reyes","60","Geriatric","Diabetes","Sulfa","u002","09561112222","Sta. Rosa, Laguna"};
-    patientCount = 3;
-    patientIdCounter = 4;
-
-    // sample prescriptions
-    prescriptions[0] = new String[]{"rx001","p001","u001","Amlodipine","5mg","Once daily","30 days","2025-05-01","Active"};
-    prescriptions[1] = new String[]{"rx002","p002","u001","Amoxicillin","500mg","Twice daily","7 days","2025-05-01","Active"};
-    prescriptions[2] = new String[]{"rx003","p003","u002","Metformin","500mg","Twice daily","30 days","2025-05-01","Active"};
-    prescriptionCount = 3;
-    prescriptionIdCounter = 4;
-
-    // sample orders
-    orders[0] = new String[]{"ord001","p001","u003","Amlodipine","30 tablets","Dispensed","2025-05-01"};
-    orders[1] = new String[]{"ord002","p002","u003","Amoxicillin","14 capsules","Pending","2025-05-01"};
-    orderCount = 2;
-    orderIdCounter = 3;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -76,9 +34,8 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JToggleButton();
         txtPassword = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,11 +48,11 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel6.setText("Password");
 
+        txtPassword.setText("jPasswordField1");
+
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/login-icon.png"))); // NOI18N
         btnLogin.setText("Login");
         btnLogin.addActionListener(this::btnLoginActionPerformed);
-
-        txtPassword.setText("jPasswordField1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,9 +60,9 @@ public class LoginFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(106, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -130,8 +87,9 @@ public class LoginFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(130, Short.MAX_VALUE)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -145,21 +103,13 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addContainerGap(75, Short.MAX_VALUE)))
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/login-icon.png"))); // NOI18N
-        jButton1.setText("Login");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -167,9 +117,7 @@ public class LoginFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -181,21 +129,18 @@ public class LoginFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtUsernameActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
 
         boolean found = false;
 
-        for (int i = 0; i < users.length; i++){
-            String storedUsername = users[i][1];
-            String storedPassword = users[i][2];
-            String role = users[i][3];
-            String name = users[i][4];
+        for (int i = 0; i < userData.users.length; i++){
+            String storedUsername = userData.users[i][1];
+            String storedPassword = userData.users[i][2];
+            String role = userData.users[i][3];
+            String name = userData.users[i][4];
 
             if (username.equals(storedUsername) && password.equals(storedPassword))
             {
@@ -252,8 +197,7 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btnLogin;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
