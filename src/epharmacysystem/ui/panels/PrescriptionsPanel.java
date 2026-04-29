@@ -3,6 +3,8 @@ package epharmacysystem.ui.panels;
 import epharmacysystem.data.DataStore;
 import epharmacysystem.ui.dialogs.AddPrescriptionDialog;
 import epharmacysystem.ui.dialogs.EditPrescriptionDialog;
+import epharmacysystem.ui.dialogs.ViewPrescriptionsDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.RowFilter;
@@ -48,16 +50,17 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
         btnAddPrescription = new javax.swing.JButton();
         btnEditPrescription = new javax.swing.JButton();
         btnDeletePrescription = new javax.swing.JButton();
+        btnViewPrescription = new javax.swing.JButton();
 
         prescriptionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Patient ID", "Doctor ID", "Medicine Name", "Dosage", "Quantity", "Date", "Status"
+                "ID", "Patient ID", "Doctor ID", "Medicine Name", "Dosage", "Quantity", "Date", "Status", "Instructions"
             }
         ));
         jScrollPane1.setViewportView(prescriptionsTable);
@@ -71,6 +74,9 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
         btnDeletePrescription.setText("Delete Prescription");
         btnDeletePrescription.addActionListener(this::btnDeletePrescriptionActionPerformed);
 
+        btnViewPrescription.setText("View Prescription");
+        btnViewPrescription.addActionListener(this::btnViewPrescriptionActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,7 +88,9 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
                 .addComponent(btnEditPrescription)
                 .addGap(18, 18, 18)
                 .addComponent(btnDeletePrescription)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnViewPrescription)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +100,8 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddPrescription)
                     .addComponent(btnEditPrescription)
-                    .addComponent(btnDeletePrescription))
+                    .addComponent(btnDeletePrescription)
+                    .addComponent(btnViewPrescription))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -152,6 +161,24 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeletePrescriptionActionPerformed
 
+    private void btnViewPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewPrescriptionActionPerformed
+        // TODO add your handling code here:
+        int row = prescriptionsTable.getSelectedRow();
+        
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Select a prescription first!");
+            return;
+        }
+ViewPrescriptionsDialog dialog =
+    new ViewPrescriptionsDialog(
+        (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
+        true,
+        row
+    );
+       
+        dialog.setVisible(true);        
+    }//GEN-LAST:event_btnViewPrescriptionActionPerformed
+
 
     private void loadPrescriptions() {
 
@@ -191,7 +218,8 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
             DataStore.prescriptions[i][4], // Dosage
             DataStore.prescriptions[i][5], // Quantity
             DataStore.prescriptions[i][6], // Date
-            DataStore.prescriptions[i][7]  // Status
+            DataStore.prescriptions[i][7],  // Status 
+     DataStore.prescriptions[i][8]  // Instructions
         });
     }
 }
@@ -203,6 +231,7 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAddPrescription;
     private javax.swing.JButton btnDeletePrescription;
     private javax.swing.JButton btnEditPrescription;
+    private javax.swing.JButton btnViewPrescription;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable prescriptionsTable;
     // End of variables declaration//GEN-END:variables

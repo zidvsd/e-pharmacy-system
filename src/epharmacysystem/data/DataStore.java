@@ -49,12 +49,12 @@ public class DataStore {
 
         prescriptions[0] = new String[]{
             "RX001", "P001", "u001", "Paracetamol", "500mg",
-            "1 tablet every 6 hours", "2026-04-28", "Pending"
+            "1 tablet every 6 hours", "2026-04-28", "Pending", "Avoid using with aspirin."
         };
 
         prescriptions[1] = new String[]{
             "RX002", "P002", "u002", "Amoxicillin", "250mg",
-            "3x a day after meals", "2026-04-28", "Completed"
+            "3x a day after meals", "2026-04-28", "Completed", "Avoid using with amoxicilin."
         };
 
         prescriptionCount = 2;

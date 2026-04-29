@@ -211,7 +211,8 @@ public class AddPrescriptionDialog extends javax.swing.JDialog {
         dosage,
         quantity,
         date,
-        status
+        status,
+        instructions
     };
 
     DataStore.prescriptionCount++;
