@@ -1,6 +1,8 @@
 package epharmacysystem.ui.panels;
 
 import epharmacysystem.data.DataStore;
+import epharmacysystem.ui.dialogs.AddPrescriptionDialog;
+import epharmacysystem.ui.dialogs.EditPrescriptionDialog;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.RowFilter;
@@ -15,17 +17,19 @@ import javax.swing.RowFilter;
  */
 public class PrescriptionsPanel extends javax.swing.JPanel {
     private DataStore ds;
-    public PrescriptionsPanel(DataStore ds) {
-    this.ds = ds;
+    
+    public PrescriptionsPanel() {
+     this.ds = ds;
     initComponents();
     loadPrescriptions();
 
-    DefaultTableModel model =(DefaultTableModel) prescriptionsTable.getModel();
-
-    sorter = new TableRowSorter<>(model);
+    DefaultTableModel model = (DefaultTableModel) prescriptionsTable.getModel();
+    javax.swing.table.TableRowSorter<DefaultTableModel> sorter = new javax.swing.table.TableRowSorter<>(model);
     prescriptionsTable.setRowSorter(sorter);
     }
 
+    
+    
     /* PrescriptionsPanel(DataStore sharedDataStore) {
     throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }*/
@@ -41,6 +45,9 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         prescriptionsTable = new javax.swing.JTable();
+        btnAddPrescription = new javax.swing.JButton();
+        btnEditPrescription = new javax.swing.JButton();
+        btnDeletePrescription = new javax.swing.JButton();
 
         prescriptionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -50,44 +57,141 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Patient ID", "Doctor Name", "Medicine Name", "Dosage", "Quantity", "Date", "Status"
+                "ID", "Patient ID", "Doctor ID", "Medicine Name", "Dosage", "Quantity", "Date", "Status"
             }
         ));
         jScrollPane1.setViewportView(prescriptionsTable);
+
+        btnAddPrescription.setText("Add Prescription");
+        btnAddPrescription.addActionListener(this::btnAddPrescriptionActionPerformed);
+
+        btnEditPrescription.setText("Edit Prescription");
+        btnEditPrescription.addActionListener(this::btnEditPrescriptionActionPerformed);
+
+        btnDeletePrescription.setText("Delete Prescription");
+        btnDeletePrescription.addActionListener(this::btnDeletePrescriptionActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnAddPrescription)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditPrescription)
+                .addGap(18, 18, 18)
+                .addComponent(btnDeletePrescription)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddPrescription)
+                    .addComponent(btnEditPrescription)
+                    .addComponent(btnDeletePrescription))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPrescriptionActionPerformed
+        // TODO add your handling code here:
+         AddPrescriptionDialog dialog = new AddPrescriptionDialog(
+        (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
+        true
+    );
+
+    dialog.setLocationRelativeTo(this);
+    dialog.setVisible(true);
+    
+    loadPrescriptions();
+    }//GEN-LAST:event_btnAddPrescriptionActionPerformed
+
+    private void btnEditPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPrescriptionActionPerformed
+      int row = prescriptionsTable.getSelectedRow();
+        if (row == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a prescription first!");
+            return;
+        }
+
+        int modelRow = prescriptionsTable.convertRowIndexToModel(row);
+
+        // Pass ds and modelRow to keep it consistent with Patients pattern
+        EditPrescriptionDialog dialog = new EditPrescriptionDialog(
+            (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
+            true, ds, modelRow
+        );
+        dialog.setVisible(true);
+        loadPrescriptions();
+    
+
+
+
+    }//GEN-LAST:event_btnEditPrescriptionActionPerformed
+
+    private void btnDeletePrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePrescriptionActionPerformed
+        int row = prescriptionsTable.getSelectedRow();
+        if (row == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a prescription first!");
+            return;
+        }
+
+        int modelRow = prescriptionsTable.convertRowIndexToModel(row);
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "Delete this prescription?", "Confirm", javax.swing.JOptionPane.YES_NO_OPTION);
+
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            // Shift array left (same pattern as patients)
+            for (int i = modelRow; i < ds.prescriptionCount - 1; i++) {
+                ds.prescriptions[i] = ds.prescriptions[i + 1];
+            }
+            ds.prescriptionCount--;
+            loadPrescriptions();
+        }
+    }//GEN-LAST:event_btnDeletePrescriptionActionPerformed
 
 
     private void loadPrescriptions() {
 
-    javax.swing.table.DefaultTableModel model =
-        (javax.swing.table.DefaultTableModel) prescriptionsTable.getModel();
+    DefaultTableModel model = (DefaultTableModel) prescriptionsTable.getModel();
 
-    model.setRowCount(0); // clear table
+    model.setRowCount(0);
 
-    for (int i = 0; i < ds.prescriptionCount; i++) {
-  
+    for (int i = 0; i < DataStore.prescriptionCount; i++) {
+
+        String patientId = DataStore.prescriptions[i][1];
+        String doctorId = DataStore.prescriptions[i][2];
+
+        String patientName = patientId;
+        String doctorName = doctorId;
+
+        // find patient name
+        for (int j = 0; j < DataStore.patientCount; j++) {
+            if (DataStore.patients[j][0].equals(patientId)) {
+                patientName = DataStore.patients[j][1];
+                break;
+            }
+        }
+
+        // find doctor name
+        for (int j = 0; j < DataStore.users.length; j++) {
+            if (DataStore.users[j][0].equals(doctorId)) {
+                doctorName = DataStore.users[j][4];
+                break;
+            }
+        }
+
         model.addRow(new Object[]{
-            ds.prescriptions[i][0], // ID
-            ds.prescriptions[i][1], // Patient ID
-            ds.prescriptions[i][2], // Doctor
-            ds.prescriptions[i][3], // Medicine
-            ds.prescriptions[i][4], // Dosage
-            ds.prescriptions[i][5], // Quantity
-            ds.prescriptions[i][6], // Date
-            ds.prescriptions[i][7]  // Status
+            DataStore.prescriptions[i][0], // ID
+            patientName,
+            doctorName,
+            DataStore.prescriptions[i][3], // Medicine
+            DataStore.prescriptions[i][4], // Dosage
+            DataStore.prescriptions[i][5], // Quantity
+            DataStore.prescriptions[i][6], // Date
+            DataStore.prescriptions[i][7]  // Status
         });
     }
 }
@@ -96,6 +200,9 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddPrescription;
+    private javax.swing.JButton btnDeletePrescription;
+    private javax.swing.JButton btnEditPrescription;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable prescriptionsTable;
     // End of variables declaration//GEN-END:variables

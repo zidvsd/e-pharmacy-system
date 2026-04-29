@@ -4,6 +4,8 @@
  */
 package epharmacysystem.ui.dialogs;
 
+import epharmacysystem.data.DataStore;
+
 /**
  *
  * @author Zid
@@ -18,6 +20,9 @@ public class AddPrescriptionDialog extends javax.swing.JDialog {
     public AddPrescriptionDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        loadMedicines();
+        loadPatients();
     }
 
     /**
@@ -29,22 +34,220 @@ public class AddPrescriptionDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addPrescriptionPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtDosage = new javax.swing.JTextField();
+        txtQuantity = new javax.swing.JTextField();
+        txtInstructions = new javax.swing.JTextField();
+        cmbMedicine = new javax.swing.JComboBox<>();
+        cmbPatient = new javax.swing.JComboBox<>();
+        btnAddPrescription = new javax.swing.JButton();
+        btnAddPrescription1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setText("Patient Name: ");
+
+        jLabel2.setText("Medicine: ");
+
+        jLabel3.setText("Dosage: ");
+
+        jLabel4.setText("Quantity:");
+
+        jLabel5.setText("Instructions: ");
+
+        txtDosage.setColumns(30);
+        txtDosage.setToolTipText("");
+        txtDosage.addActionListener(this::txtDosageActionPerformed);
+
+        txtQuantity.setColumns(30);
+        txtQuantity.setToolTipText("");
+        txtQuantity.addActionListener(this::txtQuantityActionPerformed);
+
+        txtInstructions.setColumns(30);
+        txtInstructions.setToolTipText("");
+        txtInstructions.addActionListener(this::txtInstructionsActionPerformed);
+
+        cmbMedicine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbPatient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout addPrescriptionPanelLayout = new javax.swing.GroupLayout(addPrescriptionPanel);
+        addPrescriptionPanel.setLayout(addPrescriptionPanelLayout);
+        addPrescriptionPanelLayout.setHorizontalGroup(
+            addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 341, Short.MAX_VALUE)
+            .addGroup(addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(addPrescriptionPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1))
+                    .addGap(29, 29, 29)
+                    .addGroup(addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtDosage, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbPatient, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap()))
+        );
+
+        addPrescriptionPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbMedicine, cmbPatient, jLabel1, jLabel2, jLabel3, jLabel4, jLabel5, txtDosage, txtInstructions, txtQuantity});
+
+        addPrescriptionPanelLayout.setVerticalGroup(
+            addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 182, Short.MAX_VALUE)
+            .addGroup(addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(addPrescriptionPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(cmbPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtDosage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addGroup(addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(cmbMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addGroup(addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(18, 18, 18)
+                    .addGroup(addPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        btnAddPrescription.setText("Save");
+        btnAddPrescription.addActionListener(this::btnAddPrescriptionActionPerformed);
+
+        btnAddPrescription1.setText("Cancel");
+        btnAddPrescription1.addActionListener(this::btnAddPrescription1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAddPrescription1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addPrescriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(addPrescriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddPrescription)
+                    .addComponent(btnAddPrescription1))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtDosageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDosageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDosageActionPerformed
+
+    private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantityActionPerformed
+
+    private void txtInstructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtInstructionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtInstructionsActionPerformed
+
+    private void btnAddPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPrescriptionActionPerformed
+        if (cmbPatient.getSelectedItem() == null ||
+        cmbMedicine.getSelectedItem() == null ||
+        txtDosage.getText().isEmpty() ||
+        txtQuantity.getText().isEmpty() ||
+        txtInstructions.getText().isEmpty()) {
+
+        javax.swing.JOptionPane.showMessageDialog(this, "Fill all fields!");
+        return;
+    }
+          
+        String selected = cmbPatient.getSelectedItem().toString();
+        
+        String patientId = selected.split(" - ")[0];
+        
+        String medicine = cmbMedicine.getSelectedItem().toString();
+        String dosage = txtDosage.getText();
+        String quantity = txtQuantity.getText();
+        String instructions = txtInstructions.getText();
+        
+        String doctorId = DataStore.currentUserId;
+        
+        String prescriptionId = "RX" + String.format("%03d", DataStore.prescriptionIdCounter++);
+        String date = java.time.LocalDate.now().toString();
+        String status = "Pending";
+        
+        DataStore.prescriptions[DataStore.prescriptionCount] = new String[] {
+        prescriptionId,
+        patientId,
+        doctorId,
+        medicine,
+        dosage,
+        quantity,
+        date,
+        status
+    };
+
+    DataStore.prescriptionCount++;
+
+    // ===== SUCCESS =====
+    javax.swing.JOptionPane.showMessageDialog(this, "Prescription added!");
+
+    this.dispose();
+
+    }//GEN-LAST:event_btnAddPrescriptionActionPerformed
+
+    private void btnAddPrescription1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPrescription1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddPrescription1ActionPerformed
+    private void loadMedicines() {
+
+        cmbMedicine.removeAllItems(); // clear first
+
+        for (int i = 0; i < DataStore.medicineCount; i++) {
+            String medicineName = DataStore.medicines[i][1]; // name
+            cmbMedicine.addItem(medicineName);
+        }
+    }
+    
+    private void loadPatients() {
+
+    cmbPatient.removeAllItems(); // clear first
+
+    for (int i = 0; i < DataStore.patientCount; i++) {
+
+        String patientId = DataStore.patients[i][0];
+        String patientName = DataStore.patients[i][1];
+
+        cmbPatient.addItem(patientId + " - " + patientName);
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -80,8 +283,22 @@ public class AddPrescriptionDialog extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel addPrescriptionPanel;
+    private javax.swing.JButton btnAddPrescription;
+    private javax.swing.JButton btnAddPrescription1;
+    private javax.swing.JComboBox<String> cmbMedicine;
+    private javax.swing.JComboBox<String> cmbPatient;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtDosage;
+    private javax.swing.JTextField txtInstructions;
+    private javax.swing.JTextField txtQuantity;
     // End of variables declaration//GEN-END:variables
 }

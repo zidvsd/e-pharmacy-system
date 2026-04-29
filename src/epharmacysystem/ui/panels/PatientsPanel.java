@@ -19,7 +19,7 @@ public class PatientsPanel extends javax.swing.JPanel {
     /**
      * Creates new form PatientsPanel
      */
-    public PatientsPanel(DataStore ds) {
+    public PatientsPanel() {
         this.ds = ds;
         initComponents();
         loadPatients();
@@ -73,27 +73,24 @@ public class PatientsPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addPatientBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(editPatientBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deletePatientBtn)))
-                .addContainerGap())
+                .addComponent(addPatientBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editPatientBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deletePatientBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addPatientBtn)
                     .addComponent(editPatientBtn)
                     .addComponent(deletePatientBtn))
-                .addGap(104, 104, 104))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -136,7 +133,7 @@ public class PatientsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_editPatientBtnActionPerformed
 
     private void deletePatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatientBtnActionPerformed
-        // TODO add your handling code here:
+
         int row = patientsTable.getSelectedRow();
 
         if (row == -1) {

@@ -145,11 +145,14 @@ public class LoginFrame extends javax.swing.JFrame {
             String storedPassword = DataStore.users[i][2];
             String role = DataStore.users[i][3];
             String name = DataStore.users[i][4];
-
+            String id = DataStore.users[i][0];
             if (username.equals(storedUsername) && password.equals(storedPassword))
             {
                 found  = true;
-
+                
+                 DataStore.currentUserName = name;
+                 DataStore.currentRole = role;
+                 DataStore.currentUserId = id;
                 javax.swing.JOptionPane.showMessageDialog(this, "Welcome " + name + " ("+ role + ")");
                 switch (role) {
                     case "doctor":

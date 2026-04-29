@@ -13,6 +13,9 @@
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/OrdersPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/MedicinesPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dashboard/NurseFrame.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/AddPatientDialog.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/EditPatientDialog.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/AddPrescriptionDialog.java</file>
         </group>
     </open-files>
 </project-private>

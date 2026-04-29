@@ -26,6 +26,7 @@ public class DoctorFrame extends javax.swing.JFrame {
     public DoctorFrame() {
 
         initComponents();
+        username.setText(DataStore.currentUserName);
     }
 
     
@@ -47,7 +48,7 @@ public class DoctorFrame extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         patientBtn = new javax.swing.JButton();
         prescriptionsBtn = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        username = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
         searchField = new javax.swing.JTextField();
@@ -66,7 +67,7 @@ public class DoctorFrame extends javax.swing.JFrame {
         prescriptionsBtn.setText("Prescriptions ");
         prescriptionsBtn.addActionListener(this::prescriptionsBtnActionPerformed);
 
-        jLabel2.setText("Dr. (name)");
+        username.setText("Dr. (name)");
 
         jButton1.setText("Order Status");
 
@@ -96,14 +97,12 @@ public class DoctorFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+                        .addComponent(username)
                         .addGap(34, 34, 34)
-                        .addComponent(btnLogout))
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(patientBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -112,12 +111,13 @@ public class DoctorFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(prescriptionsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
-                                .addComponent(jButton1))
-                            .addComponent(searchField)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(searchField))))
+                .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, patientBtn, prescriptionsBtn});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {patientBtn, prescriptionsBtn});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +125,7 @@ public class DoctorFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnLogout)
-                    .addComponent(jLabel2))
+                    .addComponent(username))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patientBtn)
@@ -135,9 +135,9 @@ public class DoctorFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -151,7 +151,7 @@ public class DoctorFrame extends javax.swing.JFrame {
 
     private void patientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientBtnActionPerformed
 
-    patientsPanel = new PatientsPanel(DataStore.instance);
+    patientsPanel = new PatientsPanel();
 
     contentPanel.removeAll();
     contentPanel.setLayout(new java.awt.BorderLayout());
@@ -166,7 +166,7 @@ public class DoctorFrame extends javax.swing.JFrame {
 
     private void prescriptionsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prescriptionsBtnActionPerformed
         // TODO add your handling code here:
-    prescriptionsPanel = new PrescriptionsPanel(DataStore.instance);
+    prescriptionsPanel = new PrescriptionsPanel();
 
     contentPanel.removeAll();
     contentPanel.setLayout(new java.awt.BorderLayout());
@@ -209,10 +209,10 @@ public static void main(String args[]) {
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton patientBtn;
     private javax.swing.JButton prescriptionsBtn;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchField;
+    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,14 +16,28 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" alignment="0" pref="623" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" pref="623" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Component id="btnAddPrescription" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnEditPrescription" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnDeletePrescription" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jScrollPane1" min="-2" pref="286" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnAddPrescription" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEditPrescription" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDeletePrescription" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -42,7 +56,7 @@
               <Table columnCount="8" rowCount="4">
                 <Column editable="true" title="ID" type="java.lang.Object"/>
                 <Column editable="true" title="Patient ID" type="java.lang.Object"/>
-                <Column editable="true" title="Doctor Name" type="java.lang.Object"/>
+                <Column editable="true" title="Doctor ID" type="java.lang.Object"/>
                 <Column editable="true" title="Medicine Name" type="java.lang.Object"/>
                 <Column editable="true" title="Dosage" type="java.lang.Object"/>
                 <Column editable="true" title="Quantity" type="java.lang.Object"/>
@@ -101,5 +115,29 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnAddPrescription">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Prescription"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddPrescriptionActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnEditPrescription">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Edit Prescription"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditPrescriptionActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDeletePrescription">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete Prescription"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeletePrescriptionActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
