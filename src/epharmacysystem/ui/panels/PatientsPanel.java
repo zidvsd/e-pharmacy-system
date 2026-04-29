@@ -5,6 +5,8 @@
 package epharmacysystem.ui.panels;
 
 import epharmacysystem.data.DataStore;
+import epharmacysystem.ui.dialogs.AddPatientDialog;
+import epharmacysystem.ui.dialogs.EditPatientDialog;
 
 
 /**
@@ -33,9 +35,12 @@ public class PatientsPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        patientsTable = new javax.swing.JTable();
+        addPatientBtn = new javax.swing.JButton();
+        editPatientBtn = new javax.swing.JButton();
+        deletePatientBtn = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        patientsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -46,7 +51,21 @@ public class PatientsPanel extends javax.swing.JPanel {
                 "ID", "Name", "Age", "Gender", "Ward", "History"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        patientsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                patientsTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(patientsTable);
+
+        addPatientBtn.setText("Add Patient");
+        addPatientBtn.addActionListener(this::addPatientBtnActionPerformed);
+
+        editPatientBtn.setText("Edit Patient");
+        editPatientBtn.addActionListener(this::editPatientBtnActionPerformed);
+
+        deletePatientBtn.setText("Delete Patient");
+        deletePatientBtn.addActionListener(this::deletePatientBtnActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,21 +73,103 @@ public class PatientsPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addPatientBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(editPatientBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deletePatientBtn)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addPatientBtn)
+                    .addComponent(editPatientBtn)
+                    .addComponent(deletePatientBtn))
+                .addGap(104, 104, 104))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientBtnActionPerformed
+        AddPatientDialog dialog = new AddPatientDialog(
+        (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
+        true, ds
+    );
+    dialog.setVisible(true);
+
+    loadPatients(); // refresh table
+    }//GEN-LAST:event_addPatientBtnActionPerformed
+
+    private void patientsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsTableMouseClicked
+       
+      
+    }//GEN-LAST:event_patientsTableMouseClicked
+
+    private void editPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatientBtnActionPerformed
+      
+    int row = patientsTable.getSelectedRow();
+
+    if (row == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Select a patient first!");
+        return;
+    }
+
+    int modelRow = patientsTable.convertRowIndexToModel(row);
+
+    EditPatientDialog dialog = new EditPatientDialog(
+        (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
+        true,
+        ds,
+        modelRow
+    );
+
+    dialog.setVisible(true);
+    loadPatients();
+
+    }//GEN-LAST:event_editPatientBtnActionPerformed
+
+    private void deletePatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatientBtnActionPerformed
+        // TODO add your handling code here:
+        int row = patientsTable.getSelectedRow();
+
+        if (row == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Select a patient first!");
+            return;
+        }
+
+        int modelRow = patientsTable.convertRowIndexToModel(row);
+
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to delete this patient?",
+            "Confirm Delete",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) return;
+
+        // shift array left
+        for (int i = modelRow; i < ds.patientCount - 1; i++) {
+            ds.patients[i] = ds.patients[i + 1];
+        }
+
+        ds.patientCount--;
+
+        loadPatients();
+
+    }//GEN-LAST:event_deletePatientBtnActionPerformed
 
 private void loadPatients() {
 
     javax.swing.table.DefaultTableModel model =
-        (javax.swing.table.DefaultTableModel) jTable1.getModel();
+        (javax.swing.table.DefaultTableModel) patientsTable.getModel();
 
     model.setRowCount(0); // clear table
 
@@ -88,12 +189,12 @@ private void loadPatients() {
 public void filterTable(String text) {
 
     javax.swing.table.DefaultTableModel model =
-        (javax.swing.table.DefaultTableModel) jTable1.getModel();
+        (javax.swing.table.DefaultTableModel) patientsTable.getModel();
 
     javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> sorter =
         new javax.swing.table.TableRowSorter<>(model);
 
-    jTable1.setRowSorter(sorter);
+    patientsTable.setRowSorter(sorter);
 
     sorter.setRowFilter(
     javax.swing.RowFilter.regexFilter("(?i)^" + java.util.regex.Pattern.quote(text))
@@ -101,8 +202,11 @@ public void filterTable(String text) {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addPatientBtn;
+    private javax.swing.JButton deletePatientBtn;
+    private javax.swing.JButton editPatientBtn;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable patientsTable;
     // End of variables declaration//GEN-END:variables
 }
 

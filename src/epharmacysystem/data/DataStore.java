@@ -1,7 +1,8 @@
 package epharmacysystem.data;
 
 public class DataStore {
-
+    private static boolean initialized = false;
+   
     public static String[][] users = {
         {"u001", "drjuan", "pass123", "doctor", "Dr. Juan Santos"},
         {"u002", "drmarla", "pass123", "doctor", "Dr. Marla Reyes"},
@@ -29,8 +30,12 @@ public class DataStore {
     public static int prescriptionIdCounter = 1;
     public static int orderIdCounter = 1;
     public static int medicineIdCounter = 1;
+    
+    public static final DataStore instance = new DataStore();
 
     public DataStore() {
+          if (initialized) return;
+          
         initializeSampleMedicines();
         patients[0] = new String[]{"P001", "Juan Dela Cruz", "45", "Male", "Ward A", "Diabetes"};
         patients[1] = new String[]{"P002", "Maria Santos", "32", "Female", "Ward B", "Hypertension"};
@@ -47,6 +52,10 @@ public class DataStore {
         };
 
         prescriptionCount = 2;
+        
+        patientIdCounter = patientCount + 1;
+        
+        initialized = true;
     }
 
     private void initializeSampleMedicines() {

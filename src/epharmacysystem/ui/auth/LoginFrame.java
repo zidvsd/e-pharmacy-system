@@ -54,7 +54,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         txtPassword.setText("jPasswordField1");
 
-        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/login-icon.png"))); // NOI18N
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/search-interface-symbol.png"))); // NOI18N
         btnLogin.setText("Login");
         btnLogin.addActionListener(this::btnLoginActionPerformed);
 
