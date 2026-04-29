@@ -6,8 +6,8 @@ import epharmacysystem.ui.dialogs.EditPrescriptionDialog;
 import epharmacysystem.ui.dialogs.ViewPrescriptionsDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
@@ -18,16 +18,12 @@ import javax.swing.RowFilter;
  * @author Zid
  */
 public class PrescriptionsPanel extends javax.swing.JPanel {
-    private DataStore ds;
-    
+
+    private TableRowSorter<DefaultTableModel> sorter;
     public PrescriptionsPanel() {
-     this.ds = ds;
     initComponents();
     loadPrescriptions();
 
-    DefaultTableModel model = (DefaultTableModel) prescriptionsTable.getModel();
-    javax.swing.table.TableRowSorter<DefaultTableModel> sorter = new javax.swing.table.TableRowSorter<>(model);
-    prescriptionsTable.setRowSorter(sorter);
     }
 
     
@@ -131,7 +127,7 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
         // Pass ds and modelRow to keep it consistent with Patients pattern
         EditPrescriptionDialog dialog = new EditPrescriptionDialog(
             (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
-            true, ds, modelRow
+            true,DataStore.instance, modelRow
         );
         dialog.setVisible(true);
         loadPrescriptions();
@@ -153,10 +149,10 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
 
         if (confirm == javax.swing.JOptionPane.YES_OPTION) {
             // Shift array left (same pattern as patients)
-            for (int i = modelRow; i < ds.prescriptionCount - 1; i++) {
-                ds.prescriptions[i] = ds.prescriptions[i + 1];
+            for (int i = modelRow; i < DataStore.prescriptionCount - 1; i++) {
+                DataStore.prescriptions[i] = DataStore.prescriptions[i + 1];
             }
-            ds.prescriptionCount--;
+            DataStore.prescriptionCount--;
             loadPrescriptions();
         }
     }//GEN-LAST:event_btnDeletePrescriptionActionPerformed
@@ -222,8 +218,12 @@ ViewPrescriptionsDialog dialog =
      DataStore.prescriptions[i][8]  // Instructions
         });
     }
+    if (sorter == null) {
+        sorter = new TableRowSorter<>(model);
+        prescriptionsTable.setRowSorter(sorter);
+    }
 }
-    private javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> sorter;
+   
     
    
 
@@ -236,13 +236,16 @@ ViewPrescriptionsDialog dialog =
     private javax.swing.JTable prescriptionsTable;
     // End of variables declaration//GEN-END:variables
 
-  public void filterTable(String text) {
+public void filterTable(String text) {
+
     if (sorter == null) return;
 
     if (text == null || text.trim().isEmpty()) {
         sorter.setRowFilter(null);
     } else {
-        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+        sorter.setRowFilter(
+            RowFilter.regexFilter("(?i)" + java.util.regex.Pattern.quote(text))
+        );
     }
 }
 }

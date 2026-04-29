@@ -176,7 +176,7 @@ public class DoctorFrame extends javax.swing.JFrame {
     contentPanel.repaint();
 
     activePanel = prescriptionsPanel;
-        activePanel = patientsPanel;
+
     this.pack();
     }//GEN-LAST:event_prescriptionsBtnActionPerformed
 
@@ -190,9 +190,9 @@ public class DoctorFrame extends javax.swing.JFrame {
     if (activePanel instanceof PatientsPanel) {
         ((PatientsPanel) activePanel).filterTable(text);
     } 
-    else if (activePanel instanceof PrescriptionsPanel) {
+    else if(activePanel instanceof PrescriptionsPanel) {
         ((PrescriptionsPanel) activePanel).filterTable(text);
-    }
+    } 
     }//GEN-LAST:event_searchBtnActionPerformed
 
     /**

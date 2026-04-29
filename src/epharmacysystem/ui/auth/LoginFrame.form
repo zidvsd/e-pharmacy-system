@@ -138,7 +138,7 @@
         <Component class="javax.swing.JButton" name="btnLogin">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/epharmacysystem/search-interface-symbol.png"/>
+              <Image iconType="3" name="/epharmacysystem/ui/auth/login-icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>

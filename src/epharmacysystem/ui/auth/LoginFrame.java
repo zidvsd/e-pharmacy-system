@@ -5,7 +5,6 @@
 package epharmacysystem.ui.auth;
 
 import epharmacysystem.ui.dashboard.DoctorFrame;
-import epharmacysystem.ui.dashboard.NurseFrame;
 import epharmacysystem.ui.dashboard.PatientFrame;
 import epharmacysystem.ui.dashboard.PharmacistFrame;
 import epharmacysystem.data.DataStore;
@@ -56,7 +55,7 @@ setLocationRelativeTo(null);
 
         txtPassword.setText("jPasswordField1");
 
-        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/search-interface-symbol.png"))); // NOI18N
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/ui/auth/login-icon.png"))); // NOI18N
         btnLogin.setText("Login");
         btnLogin.addActionListener(this::btnLoginActionPerformed);
 
@@ -159,9 +158,6 @@ setLocationRelativeTo(null);
                 switch (role) {
                     case "doctor":
                         new DoctorFrame().setVisible(true);
-                        break;
-                    case "nurse":
-                        new NurseFrame().setVisible(true);
                         break;
                     case "patient":
                         new PatientFrame().setVisible(true);

@@ -196,6 +196,9 @@ public void filterTable(String text) {
     sorter.setRowFilter(
     javax.swing.RowFilter.regexFilter("(?i)^" + java.util.regex.Pattern.quote(text))
 );
+    
+    
+    
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

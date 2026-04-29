@@ -11,11 +11,9 @@ public class DataStore {
     public static String[][] users = {
         {"u001", "drjuan", "pass123", "doctor", "Dr. Juan Santos"},
         {"u002", "drmarla", "pass123", "doctor", "Dr. Marla Reyes"},
-        {"u003", "nurseana", "pass123", "nurse", "Nurse Ana Cruz"},
-        {"u004", "nursebob", "pass123", "nurse", "Nurse Bob Lim"},
-        {"u005", "patient1", "pass123", "patient", "Juan Dela Cruz"},
-        {"u006", "patient2", "pass123", "patient", "Maria Santos"},
-        {"u007", "pharmacist1", "pass123", "pharmacist", "Pharmacist John"}
+        {"u003", "patient1", "pass123", "patient", "Juan Dela Cruz"},
+        {"u004", "patient2", "pass123", "patient", "Maria Santos"},
+        {"u005", "pharmacist1", "pass123", "pharmacist", "Pharmacist John"}
     };
  
     // ================= DATA TABLES =================
@@ -49,12 +47,12 @@ public class DataStore {
 
         prescriptions[0] = new String[]{
             "RX001", "P001", "u001", "Paracetamol", "500mg",
-            "1 tablet every 6 hours", "2026-04-28", "Pending", "Avoid using with aspirin."
+            "20", "2026-04-28", "Pending", "1 tablet every 6 hours"
         };
 
         prescriptions[1] = new String[]{
             "RX002", "P002", "u002", "Amoxicillin", "250mg",
-            "3x a day after meals", "2026-04-28", "Completed", "Avoid using with amoxicilin."
+            "12", "2026-04-28", "Completed", "3x a day after meals"
         };
 
         prescriptionCount = 2;
