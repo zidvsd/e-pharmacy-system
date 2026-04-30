@@ -176,24 +176,46 @@ public class AddPatientDialog extends javax.swing.JDialog {
     }
 
     // 2. Generate ID
-  String id = String.format("P%03d", ds.patientIdCounter);
+    String patientId = String.format("P%03d", DataStore.patientIdCounter);
+    String userId = String.format("u%03d", DataStore.users.length + 1);
+    
+    String username = txtName.getText().replace(" ", "").toLowerCase();
+    String password = "pass123";
+    
+    DataStore.users = java.util.Arrays.copyOf(
+            DataStore.users,
+            DataStore.users.length + 1
+    );
 
-    // 3. Save to DataStore
-    ds.patients[ds.patientCount] = new String[]{
-        id,
+     DataStore.users[DataStore.users.length - 1] = new String[]{
+        userId,
+        username,
+        password,
+        "patient",
+        txtName.getText()
+    };
+     
+     DataStore.patients[DataStore.patientCount] = new String[]{
+        patientId,
         txtName.getText(),
         txtAge.getText(),
         cmbGender.getSelectedItem().toString(),
         txtWard.getText(),
-        txtHistory.getText()
+        txtHistory.getText(),
+        userId // 🔥 IMPORTANT LINK
     };
 
-    ds.patientCount++;
-    ds.patientIdCounter++;
+    DataStore.patientCount++;
+    DataStore.patientIdCounter++;
 
     // 4. Success message
-    javax.swing.JOptionPane.showMessageDialog(this,
-            "Patient added successfully!");
+      javax.swing.JOptionPane.showMessageDialog(this,
+            "Patient added successfully!\n"
+            + "Username: " + username + "\n"
+            + "Password: " + password);
+
+    // 8. Close dialog
+    this.dispose();
 
     // 5. Close dialog
     this.dispose();

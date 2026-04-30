@@ -39,8 +39,8 @@ public class DataStore {
 
     private static void initializeSampleData() {
 
-        patients[0] = new String[]{"P001", "Juan Dela Cruz", "45", "Male", "Ward A", "Diabetes", "u001"};
-        patients[1] = new String[]{"P002", "Maria Santos", "32", "Female", "Ward B", "Hypertension", "u002"};
+        patients[0] = new String[]{"P001", "Juan Dela Cruz", "45", "Male", "Ward A", "Diabetes", "u003"};
+        patients[1] = new String[]{"P002", "Maria Santos", "32", "Female", "Ward B", "Hypertension", "u004"};
         patientCount = 2;
 
         patientIdCounter = 3; 
