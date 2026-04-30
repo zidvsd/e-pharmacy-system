@@ -18,7 +18,7 @@ import javax.swing.table.TableRowSorter;
  * @author Zid
  */
 public class PrescriptionsPanel extends javax.swing.JPanel {
-
+    
     private TableRowSorter<DefaultTableModel> sorter;
     public PrescriptionsPanel() {
     initComponents();
@@ -159,18 +159,26 @@ public class PrescriptionsPanel extends javax.swing.JPanel {
 
     private void btnViewPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewPrescriptionActionPerformed
         // TODO add your handling code here:
-        int row = prescriptionsTable.getSelectedRow();
+        int viewRow = prescriptionsTable.getSelectedRow();
         
-        if (row == -1) {
+        if (viewRow == -1) {
             JOptionPane.showMessageDialog(this, "Select a prescription first!");
             return;
         }
-ViewPrescriptionsDialog dialog =
-    new ViewPrescriptionsDialog(
-        (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
-        true,
-        row
-    );
+        
+         int modelRow = prescriptionsTable.convertRowIndexToModel(viewRow);
+         
+         String prescriptionId =
+            prescriptionsTable.getModel()
+            .getValueAt(modelRow, 0)
+            .toString();
+         
+  ViewPrescriptionsDialog dialog =
+        new ViewPrescriptionsDialog(
+            (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
+            true,
+            prescriptionId
+        );
        
         dialog.setVisible(true);        
     }//GEN-LAST:event_btnViewPrescriptionActionPerformed

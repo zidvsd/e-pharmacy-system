@@ -6,6 +6,9 @@ package epharmacysystem.ui.dashboard;
 
 import epharmacysystem.data.DataStore;
 import epharmacysystem.ui.auth.LoginFrame;
+import epharmacysystem.ui.panels.MyPrescriptionsPanel;
+
+
 import epharmacysystem.ui.panels.ProfilePanel;
 
 /**
@@ -16,9 +19,7 @@ public class PatientFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PatientFrame.class.getName());
     private ProfilePanel profilePanel;
-    /**
-     * Creates new form PatientFrame
-     */
+    private MyPrescriptionsPanel myPrescriptionsPanel;
     public PatientFrame() {
         initComponents();
         username.setText(DataStore.currentUserName);
@@ -38,7 +39,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         username = new javax.swing.JLabel();
         btnMyProfile = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnMyPrescriptions = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
 
@@ -62,8 +63,8 @@ public class PatientFrame extends javax.swing.JFrame {
         btnMyProfile.setText("My Profile");
         btnMyProfile.addActionListener(this::btnMyProfileActionPerformed);
 
-        jButton2.setText("Prescriptions");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        btnMyPrescriptions.setText("Prescriptions");
+        btnMyPrescriptions.addActionListener(this::btnMyPrescriptionsActionPerformed);
 
         jButton3.setText("Orders");
         jButton3.addActionListener(this::jButton3ActionPerformed);
@@ -81,7 +82,7 @@ public class PatientFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnMyProfile)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnMyPrescriptions)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -108,7 +109,7 @@ public class PatientFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnMyProfile)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
+                        .addComponent(btnMyPrescriptions)
                         .addComponent(jButton3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -119,7 +120,7 @@ public class PatientFrame extends javax.swing.JFrame {
 
     private void btnMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileActionPerformed
         // TODO add your handling code here:
-         profilePanel = new ProfilePanel(); 
+    profilePanel = new ProfilePanel(); 
 
     contentPanel.removeAll();
     contentPanel.setLayout(new java.awt.BorderLayout());
@@ -133,9 +134,18 @@ public class PatientFrame extends javax.swing.JFrame {
     this.pack();
     }//GEN-LAST:event_btnMyProfileActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btnMyPrescriptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyPrescriptionsActionPerformed
+   
+    myPrescriptionsPanel = new MyPrescriptionsPanel();
+    
+    contentPanel.removeAll();
+    contentPanel.setLayout(new java.awt.BorderLayout());
+    contentPanel.add(myPrescriptionsPanel);
+
+    contentPanel.revalidate();
+    contentPanel.repaint();
+    this.pack();
+    }//GEN-LAST:event_btnMyPrescriptionsActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -174,9 +184,9 @@ public class PatientFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnMyPrescriptions;
     private javax.swing.JButton btnMyProfile;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel username;

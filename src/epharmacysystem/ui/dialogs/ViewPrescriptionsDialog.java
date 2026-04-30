@@ -12,56 +12,70 @@ import epharmacysystem.data.DataStore;
  */
 public class ViewPrescriptionsDialog extends javax.swing.JDialog {
     private DataStore ds;
-    private int rowIndex;
+    private String prescriptionId;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewPrescriptionsDialog.class.getName());
     
     /**
      * Creates new form ViewPrescriptionsDialog
      */
-    public ViewPrescriptionsDialog(java.awt.Frame parent, boolean modal, int rowIndex) {
+    public ViewPrescriptionsDialog(java.awt.Frame parent, boolean modal, String prescriptionId) {
         super(parent, modal);
         this.ds = DataStore.instance;
-        this.rowIndex = rowIndex;
+        this.prescriptionId = prescriptionId;
 
         initComponents();
+        loadPrescription();
+           
         
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        
-        loadPrescription();
         this.setResizable(false);
         this.pack();
         this.setLocationRelativeTo(parent);
     }
 
     private void loadPrescription() {
+ int index = -1;
 
-        String patientId = ds.prescriptions[rowIndex][1];
-        String doctorId = ds.prescriptions[rowIndex][2];
-
-        String patientName = "Unknown Patient";
-        for (int i = 0; i < DataStore.patientCount; i++) {
-            if (DataStore.patients[i][0].equals(patientId)) {
-                patientName = DataStore.patients[i][1];
-                break;
-            }
+    // 1. find prescription by ID
+    for (int i = 0; i < DataStore.prescriptionCount; i++) {
+        if (DataStore.prescriptions[i][0].equals(prescriptionId)) {
+            index = i;
+            break;
         }
-        lblPatientName.setText(patientName);
+    }
 
-        String doctorName = "Unknown Doctor";
-        for (int i = 0; i < DataStore.users.length; i++) {
-            if (DataStore.users[i][0].equals(doctorId)) {
-                doctorName = DataStore.users[i][4];
-                break;
-            }
+    if (index == -1) return;
+
+    String patientId = DataStore.prescriptions[index][1];
+    String doctorId = DataStore.prescriptions[index][2];
+
+    // patient name
+    String patientName = "Unknown Patient";
+    for (int i = 0; i < DataStore.patientCount; i++) {
+        if (DataStore.patients[i][0].equals(patientId)) {
+            patientName = DataStore.patients[i][1];
+            break;
         }
-        lblDoctorName.setText(doctorName);
+    }
 
-        lblDate.setText(ds.prescriptions[rowIndex][6]);
-        lblStatus.setText(ds.prescriptions[rowIndex][7]);
-        lblMedicine.setText(ds.prescriptions[rowIndex][3]);
-        lblDosage.setText(ds.prescriptions[rowIndex][4]);
-        lblQuantity.setText(ds.prescriptions[rowIndex][5]);
-        lblInstructions.setText(ds.prescriptions[rowIndex][8]);
+    // doctor name
+    String doctorName = "Unknown Doctor";
+    for (int i = 0; i < DataStore.users.length; i++) {
+        if (DataStore.users[i][0].equals(doctorId)) {
+            doctorName = DataStore.users[i][4];
+            break;
+        }
+    }
+
+    lblPatientName.setText(patientName);
+    lblDoctorName.setText(doctorName);
+
+    lblDate.setText(DataStore.prescriptions[index][6]);
+    lblStatus.setText(DataStore.prescriptions[index][7]);
+    lblMedicine.setText(DataStore.prescriptions[index][3]);
+    lblDosage.setText(DataStore.prescriptions[index][4]);
+    lblQuantity.setText(DataStore.prescriptions[index][5]);
+    lblInstructions.setText(DataStore.prescriptions[index][8]);
     }
     
     /**
