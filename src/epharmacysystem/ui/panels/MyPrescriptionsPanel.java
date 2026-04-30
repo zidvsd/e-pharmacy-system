@@ -68,7 +68,7 @@ public class MyPrescriptionsPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnViewPrescription)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -129,7 +129,20 @@ private void loadMyPrescriptions() {
         }
     }
 }
+public void filterTable(String text) {
 
+    javax.swing.table.DefaultTableModel model =
+        (javax.swing.table.DefaultTableModel) myPrescriptionsTbl.getModel();
+
+    javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> sorter =
+        new javax.swing.table.TableRowSorter<>(model);
+
+    myPrescriptionsTbl.setRowSorter(sorter);
+
+    sorter.setRowFilter(
+    javax.swing.RowFilter.regexFilter("(?i)^" + java.util.regex.Pattern.quote(text))
+        );
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnViewPrescription;
     private javax.swing.JScrollPane jScrollPane1;

@@ -201,7 +201,7 @@ public class AddPrescriptionDialog extends javax.swing.JDialog {
         
         String prescriptionId = "RX" + String.format("%03d", DataStore.prescriptionIdCounter++);
         String date = java.time.LocalDate.now().toString();
-        String status = "Pending";
+        String status = DataStore.RX_PENDING;
         
         DataStore.prescriptions[DataStore.prescriptionCount] = new String[] {
         prescriptionId,

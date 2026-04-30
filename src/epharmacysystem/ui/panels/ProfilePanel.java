@@ -61,7 +61,7 @@ System.out.println("BEFORE LABEL: " + txtPatientName.getText());
         txtPatientWard = new javax.swing.JLabel();
         txtPatientHistory = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

@@ -6,6 +6,7 @@ package epharmacysystem.ui.dashboard;
 
 import epharmacysystem.ui.auth.LoginFrame;
 import epharmacysystem.data.DataStore;
+import epharmacysystem.ui.panels.DoctorsOrderPanel;
 import epharmacysystem.ui.panels.PrescriptionsPanel;
 import epharmacysystem.ui.panels.PatientsPanel;
 import java.util.logging.Logger;
@@ -22,11 +23,14 @@ public class DoctorFrame extends javax.swing.JFrame {
 
     private PatientsPanel patientsPanel;
     private PrescriptionsPanel prescriptionsPanel;
+    private DoctorsOrderPanel doctorsOrderPanel;
     private javax.swing.JPanel activePanel;
     public DoctorFrame() {
 
         initComponents();
         username.setText(DataStore.currentUserName);
+        searchField.setVisible(false);
+        searchBtn.setVisible(false);
     }
 
     
@@ -44,15 +48,20 @@ public class DoctorFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        searchBtn1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         patientBtn = new javax.swing.JButton();
         prescriptionsBtn = new javax.swing.JButton();
         username = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        ordersBtn = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
         searchField = new javax.swing.JTextField();
         searchBtn = new javax.swing.JButton();
+
+        searchBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/ui/dashboard/search-interface-symbol.png"))); // NOI18N
+        searchBtn1.setText("Search");
+        searchBtn1.addActionListener(this::searchBtn1ActionPerformed);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,7 +78,8 @@ public class DoctorFrame extends javax.swing.JFrame {
 
         username.setText("Dr. (name)");
 
-        jButton1.setText("Order Status");
+        ordersBtn.setText("Order Status");
+        ordersBtn.addActionListener(this::ordersBtnActionPerformed);
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
@@ -82,7 +92,7 @@ public class DoctorFrame extends javax.swing.JFrame {
             .addGap(0, 247, Short.MAX_VALUE)
         );
 
-        searchField.setText("Search for patient...");
+        searchField.setText("Search...");
         searchField.addActionListener(this::searchFieldActionPerformed);
 
         searchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/ui/dashboard/search-interface-symbol.png"))); // NOI18N
@@ -98,7 +108,7 @@ public class DoctorFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(username)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -109,15 +119,14 @@ public class DoctorFrame extends javax.swing.JFrame {
                             .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(prescriptionsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(searchField))))
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(prescriptionsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                        .addComponent(ordersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {patientBtn, prescriptionsBtn});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ordersBtn, patientBtn, prescriptionsBtn, searchBtn});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +139,7 @@ public class DoctorFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patientBtn)
                     .addComponent(prescriptionsBtn)
-                    .addComponent(jButton1))
+                    .addComponent(ordersBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,7 +169,11 @@ public class DoctorFrame extends javax.swing.JFrame {
     contentPanel.revalidate();
     contentPanel.repaint();
     
+    
     activePanel = patientsPanel;
+    searchField.setVisible(true);
+    searchField.setText("Search for patients...");
+    searchBtn.setVisible(true);
     this.pack();
     }//GEN-LAST:event_patientBtnActionPerformed
 
@@ -176,7 +189,9 @@ public class DoctorFrame extends javax.swing.JFrame {
     contentPanel.repaint();
 
     activePanel = prescriptionsPanel;
-
+     searchField.setVisible(true);
+    searchField.setText("Search for prescriptions...");
+    searchBtn.setVisible(true);
     this.pack();
     }//GEN-LAST:event_prescriptionsBtnActionPerformed
 
@@ -185,7 +200,7 @@ public class DoctorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_searchFieldActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
-             String text = searchField.getText();
+    String text = searchField.getText();
 
     if (activePanel instanceof PatientsPanel) {
         ((PatientsPanel) activePanel).filterTable(text);
@@ -193,7 +208,32 @@ public class DoctorFrame extends javax.swing.JFrame {
     else if(activePanel instanceof PrescriptionsPanel) {
         ((PrescriptionsPanel) activePanel).filterTable(text);
     } 
+    else if(activePanel instanceof DoctorsOrderPanel) {
+        ((DoctorsOrderPanel) activePanel).filterTable(text);
+    } 
     }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void searchBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn1ActionPerformed
+      
+        
+    }//GEN-LAST:event_searchBtn1ActionPerformed
+
+    private void ordersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordersBtnActionPerformed
+    doctorsOrderPanel = new DoctorsOrderPanel();
+
+    contentPanel.removeAll();
+    contentPanel.setLayout(new java.awt.BorderLayout());
+    contentPanel.add(doctorsOrderPanel);
+
+    contentPanel.revalidate();
+    contentPanel.repaint();
+
+    activePanel = doctorsOrderPanel;
+    searchField.setVisible(true);
+    searchField.setText("Search for prescriptions...");
+    searchBtn.setVisible(true);
+    this.pack();
+    }//GEN-LAST:event_ordersBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,11 +247,12 @@ public static void main(String args[]) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton ordersBtn;
     private javax.swing.JButton patientBtn;
     private javax.swing.JButton prescriptionsBtn;
     private javax.swing.JButton searchBtn;
+    private javax.swing.JButton searchBtn1;
     private javax.swing.JTextField searchField;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables

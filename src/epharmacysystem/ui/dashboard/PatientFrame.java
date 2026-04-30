@@ -20,10 +20,12 @@ public class PatientFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PatientFrame.class.getName());
     private ProfilePanel profilePanel;
     private MyPrescriptionsPanel myPrescriptionsPanel;
+    private javax.swing.JPanel activePanel;
     public PatientFrame() {
         initComponents();
         username.setText(DataStore.currentUserName);
-        
+        searchField.setVisible(false);
+        searchBtn.setVisible(false);
     }
 
     /**
@@ -42,6 +44,8 @@ public class PatientFrame extends javax.swing.JFrame {
         btnMyPrescriptions = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
+        searchField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,14 +67,21 @@ public class PatientFrame extends javax.swing.JFrame {
         btnMyProfile.setText("My Profile");
         btnMyProfile.addActionListener(this::btnMyProfileActionPerformed);
 
-        btnMyPrescriptions.setText("Prescriptions");
+        btnMyPrescriptions.setText("My Prescriptions");
         btnMyPrescriptions.addActionListener(this::btnMyPrescriptionsActionPerformed);
 
-        jButton3.setText("Orders");
+        jButton3.setText("My Orders");
         jButton3.addActionListener(this::jButton3ActionPerformed);
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
+
+        searchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/ui/dashboard/search-interface-symbol.png"))); // NOI18N
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(this::searchBtnActionPerformed);
+
+        searchField.setText("Search for your prescription...");
+        searchField.addActionListener(this::searchFieldActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,24 +90,32 @@ public class PatientFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnMyProfile)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnMyPrescriptions)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                                 .addComponent(username)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMyProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnMyPrescriptions)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(searchField))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMyPrescriptions, btnMyProfile, jButton3});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -111,7 +130,11 @@ public class PatientFrame extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnMyPrescriptions)
                         .addComponent(jButton3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -128,7 +151,9 @@ public class PatientFrame extends javax.swing.JFrame {
 
     contentPanel.revalidate();
     contentPanel.repaint();
-
+    
+    searchField.setVisible(false);
+    searchBtn.setVisible(false);
     
 
     this.pack();
@@ -144,6 +169,11 @@ public class PatientFrame extends javax.swing.JFrame {
 
     contentPanel.revalidate();
     contentPanel.repaint();
+    
+    activePanel = myPrescriptionsPanel;
+            
+    searchField.setVisible(true);
+    searchBtn.setVisible(true);
     this.pack();
     }//GEN-LAST:event_btnMyPrescriptionsActionPerformed
 
@@ -156,6 +186,19 @@ public class PatientFrame extends javax.swing.JFrame {
         this.dispose();
         new LoginFrame().setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        String text = searchField.getText();
+
+        if (activePanel instanceof MyPrescriptionsPanel) {
+            ((MyPrescriptionsPanel) activePanel).filterTable(text);
+        }
+    
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,6 +232,8 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JTextField searchField;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }

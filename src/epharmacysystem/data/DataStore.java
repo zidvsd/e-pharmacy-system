@@ -26,10 +26,22 @@ public class DataStore {
     public static String[][] medicines = new String[100][7];
     public static int medicineCount = 0;
 
+    public static String[][] orders = new String[100][8];
+    public static int orderCount = 0;
     // ================= ID COUNTERS =================
     public static int patientIdCounter = 1;
     public static int prescriptionIdCounter = 1;
     public static int medicineIdCounter = 1;
+    public static int orderIdCounter = 1;
+
+    public static final String RX_PENDING = "Pending";
+    public static final String RX_ACTIVE = "Active";
+    public static final String RX_FULFILLED = "Fulfilled";
+
+    public static final String ORDER_PENDING = "Pending";
+    public static final String ORDER_APPROVED = "Approved";
+    public static final String ORDER_REJECTED = "Rejected";
+    
     public static DataStore instance;
 
     // ================= INITIAL DATA BLOCK =================
@@ -52,12 +64,36 @@ public class DataStore {
 
         prescriptions[1] = new String[]{
             "RX002", "P002", "u002", "Amoxicillin", "250mg",
-            "12", "2026-04-28", "Completed", "3x a day after meals"
+            "12", "2026-04-28", "Active", "3x a day after meals"
         };
 
         prescriptionCount = 2;
         prescriptionIdCounter = 3;
 
+        orders[0] = new String[]{
+        "ORD001", "P001", "RX001", "Paracetamol", "20",
+        ORDER_PENDING, "2026-04-29", "65.00"
+        };
+
+        orders[1] = new String[]{
+            "ORD002", "P002", "RX002", "Amoxicillin", "12",
+            ORDER_APPROVED, "2026-04-29", "144.00"
+        };
+
+        orders[2] = new String[]{
+            "ORD003", "P001", "RX001", "Paracetamol", "10",
+            ORDER_REJECTED, "2026-04-30", "32.50"
+        };
+
+        orders[3] = new String[]{
+            "ORD004", "P002", "RX002", "Amoxicillin", "6",
+            ORDER_PENDING, "2026-04-30", "72.00"
+        };
+
+        orderCount = 4;
+        orderIdCounter = 5;
+        
+        
         initializeSampleMedicines();
     }
 
@@ -71,4 +107,5 @@ public class DataStore {
         medicineCount = 4;
         medicineIdCounter = 5;
     }
+    
 }
