@@ -23,6 +23,8 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JPanel activePanel;
     public PatientFrame() {
         initComponents();
+        pack();
+        setLocationRelativeTo(null);
         username.setText(DataStore.currentUserName);
         searchField.setVisible(false);
         searchBtn.setVisible(false);

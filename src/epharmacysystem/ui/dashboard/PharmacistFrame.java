@@ -17,6 +17,8 @@ public class PharmacistFrame extends javax.swing.JFrame {
      */
     public PharmacistFrame() {
         initComponents();
+        pack();
+        setLocationRelativeTo(null);
     }
 
     /**

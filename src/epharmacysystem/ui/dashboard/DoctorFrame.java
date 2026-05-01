@@ -28,6 +28,8 @@ public class DoctorFrame extends javax.swing.JFrame {
     public DoctorFrame() {
 
         initComponents();
+        pack();
+        setLocationRelativeTo(null);
         username.setText(DataStore.currentUserName);
         searchField.setVisible(false);
         searchBtn.setVisible(false);
