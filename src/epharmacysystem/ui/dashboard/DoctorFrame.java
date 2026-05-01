@@ -6,9 +6,9 @@ package epharmacysystem.ui.dashboard;
 
 import epharmacysystem.ui.auth.LoginFrame;
 import epharmacysystem.data.DataStore;
-import epharmacysystem.ui.panels.DoctorsOrderPanel;
-import epharmacysystem.ui.panels.PrescriptionsPanel;
-import epharmacysystem.ui.panels.PatientsPanel;
+import epharmacysystem.ui.panels.DoctorsOrdersPanel;
+import epharmacysystem.ui.panels.DoctorsPrescriptionsPanel;
+import epharmacysystem.ui.panels.DoctorsPatientsPanel;
 import java.util.logging.Logger;
 
 
@@ -21,9 +21,9 @@ public class DoctorFrame extends javax.swing.JFrame {
 
     private static final Logger logger = Logger.getLogger(DoctorFrame.class.getName());
 
-    private PatientsPanel patientsPanel;
-    private PrescriptionsPanel prescriptionsPanel;
-    private DoctorsOrderPanel doctorsOrderPanel;
+    private DoctorsPatientsPanel patientsPanel;
+    private DoctorsPrescriptionsPanel prescriptionsPanel;
+    private DoctorsOrdersPanel doctorsOrderPanel;
     private javax.swing.JPanel activePanel;
     public DoctorFrame() {
 
@@ -162,7 +162,7 @@ public class DoctorFrame extends javax.swing.JFrame {
 
     private void patientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientBtnActionPerformed
 
-    patientsPanel = new PatientsPanel();
+    patientsPanel = new DoctorsPatientsPanel();
 
     contentPanel.removeAll();
     contentPanel.setLayout(new java.awt.BorderLayout());
@@ -181,7 +181,7 @@ public class DoctorFrame extends javax.swing.JFrame {
 
     private void prescriptionsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prescriptionsBtnActionPerformed
         // TODO add your handling code here:
-    prescriptionsPanel = new PrescriptionsPanel();
+    prescriptionsPanel = new DoctorsPrescriptionsPanel();
 
     contentPanel.removeAll();
     contentPanel.setLayout(new java.awt.BorderLayout());
@@ -204,14 +204,14 @@ public class DoctorFrame extends javax.swing.JFrame {
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
     String text = searchField.getText();
 
-    if (activePanel instanceof PatientsPanel) {
-        ((PatientsPanel) activePanel).filterTable(text);
+    if (activePanel instanceof DoctorsPatientsPanel) {
+        ((DoctorsPatientsPanel) activePanel).filterTable(text);
     } 
-    else if(activePanel instanceof PrescriptionsPanel) {
-        ((PrescriptionsPanel) activePanel).filterTable(text);
+    else if(activePanel instanceof DoctorsPrescriptionsPanel) {
+        ((DoctorsPrescriptionsPanel) activePanel).filterTable(text);
     } 
-    else if(activePanel instanceof DoctorsOrderPanel) {
-        ((DoctorsOrderPanel) activePanel).filterTable(text);
+    else if(activePanel instanceof DoctorsOrdersPanel) {
+        ((DoctorsOrdersPanel) activePanel).filterTable(text);
     } 
     }//GEN-LAST:event_searchBtnActionPerformed
 
@@ -220,7 +220,7 @@ public class DoctorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_searchBtn1ActionPerformed
 
     private void ordersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordersBtnActionPerformed
-    doctorsOrderPanel = new DoctorsOrderPanel();
+    doctorsOrderPanel = new DoctorsOrdersPanel();
 
     contentPanel.removeAll();
     contentPanel.setLayout(new java.awt.BorderLayout());

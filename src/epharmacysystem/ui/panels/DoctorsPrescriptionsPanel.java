@@ -17,10 +17,10 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Zid
  */
-public class PrescriptionsPanel extends javax.swing.JPanel {
+public class DoctorsPrescriptionsPanel extends javax.swing.JPanel {
     
     private TableRowSorter<DefaultTableModel> sorter;
-    public PrescriptionsPanel() {
+    public DoctorsPrescriptionsPanel() {
     initComponents();
     loadPrescriptions();
 

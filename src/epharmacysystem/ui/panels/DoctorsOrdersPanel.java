@@ -15,12 +15,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Zid
  */
-public class DoctorsOrderPanel extends javax.swing.JPanel {
+public class DoctorsOrdersPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DoctorsOrderPanel
      */
-    public DoctorsOrderPanel() {
+    public DoctorsOrdersPanel() {
         initComponents();
         loadOrders();
     }

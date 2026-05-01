@@ -13,13 +13,13 @@ import epharmacysystem.ui.dialogs.EditPatientDialog;
  *
  * @author Zid
  */
-public class PatientsPanel extends javax.swing.JPanel {
+public class DoctorsPatientsPanel extends javax.swing.JPanel {
     private DataStore ds;
     
     /**
      * Creates new form PatientsPanel
      */
-    public PatientsPanel() {
+    public DoctorsPatientsPanel() {
         this.ds = ds;
         initComponents();
         loadPatients();
