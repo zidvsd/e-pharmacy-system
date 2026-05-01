@@ -5,7 +5,7 @@
 package epharmacysystem.ui.panels;
 
 import epharmacysystem.data.DataStore;
-import epharmacysystem.ui.dialogs.ViewPrescriptionsDialog;
+import epharmacysystem.ui.dialogs.ViewPrescriptionDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -58,7 +58,7 @@ public class MyPrescriptionsPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(btnViewPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnViewPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -84,12 +84,12 @@ public class MyPrescriptionsPanel extends javax.swing.JPanel {
         
         String prescriptionId = model.getValueAt(row, 0).toString();
         
-        ViewPrescriptionsDialog dialog =
-        new ViewPrescriptionsDialog(
+        ViewPrescriptionDialog dialog =
+        new ViewPrescriptionDialog(
         (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
         true,prescriptionId
         );
-       
+         dialog.setLocationRelativeTo(this); 
         dialog.setVisible(true);    
     }//GEN-LAST:event_btnViewPrescriptionActionPerformed
 private void loadMyPrescriptions() {

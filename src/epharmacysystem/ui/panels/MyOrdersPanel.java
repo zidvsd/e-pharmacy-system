@@ -1,6 +1,6 @@
 package epharmacysystem.ui.panels;
 
-import epharmacysystem.ui.dialogs.ViewOrdersDialog;
+import epharmacysystem.ui.dialogs.ViewOrderDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -143,12 +143,12 @@ public void filterTable(String text) {
         
         String orderId = model.getValueAt(row, 0).toString();
         
-        ViewOrdersDialog dialog =
-        new ViewOrdersDialog(
+        ViewOrderDialog dialog =
+        new ViewOrderDialog(
         (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
         true,orderId
         );
-       
+         dialog.setLocationRelativeTo(this); 
         dialog.setVisible(true);    
     }//GEN-LAST:event_btnViewOrderActionPerformed
 

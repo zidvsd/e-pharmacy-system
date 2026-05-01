@@ -100,7 +100,7 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
         true, DataStore.instance
     );
     
-        dialog.setLocationRelativeTo(this); // 👈 ADD THIS
+        dialog.setLocationRelativeTo(this); 
     dialog.setVisible(true);
     loadPatients(); // refresh table
     }//GEN-LAST:event_addPatientBtnActionPerformed

@@ -3,7 +3,7 @@ package epharmacysystem.ui.panels;
 import epharmacysystem.data.DataStore;
 import epharmacysystem.ui.dialogs.AddPrescriptionDialog;
 import epharmacysystem.ui.dialogs.EditPrescriptionDialog;
-import epharmacysystem.ui.dialogs.ViewPrescriptionsDialog;
+import epharmacysystem.ui.dialogs.ViewPrescriptionDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.RowFilter;
@@ -182,8 +182,8 @@ public class DoctorsPrescriptionsPanel extends javax.swing.JPanel {
             .getValueAt(modelRow, 0)
             .toString();
          
-  ViewPrescriptionsDialog dialog =
-        new ViewPrescriptionsDialog(
+  ViewPrescriptionDialog dialog =
+        new ViewPrescriptionDialog(
             (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
             true,
             prescriptionId

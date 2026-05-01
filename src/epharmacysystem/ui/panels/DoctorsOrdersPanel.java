@@ -7,7 +7,7 @@ package epharmacysystem.ui.panels;
 import epharmacysystem.data.DataStore;
 import epharmacysystem.ui.dialogs.AddPatientDialog;
 import epharmacysystem.ui.dialogs.DoctorCreateOrderDialog;
-import epharmacysystem.ui.dialogs.ViewOrdersDialog;
+import epharmacysystem.ui.dialogs.ViewOrderDialog;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -107,8 +107,8 @@ public class DoctorsOrdersPanel extends javax.swing.JPanel {
         
         String orderId = model.getValueAt(row, 0).toString();
         
-        ViewOrdersDialog dialog =
-        new ViewOrdersDialog(
+        ViewOrderDialog dialog =
+        new ViewOrderDialog(
         (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
         true,orderId
         );
