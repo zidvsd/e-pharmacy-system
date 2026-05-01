@@ -4,6 +4,10 @@
  */
 package epharmacysystem.ui.dashboard;
 
+import epharmacysystem.data.DataStore;
+import epharmacysystem.ui.auth.LoginFrame;
+import epharmacysystem.ui.panels.PharmacistsPrescriptionsPanel;
+
 /**
  *
  * @author Zid
@@ -11,7 +15,8 @@ package epharmacysystem.ui.dashboard;
 public class PharmacistFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PharmacistFrame.class.getName());
-
+    private PharmacistsPrescriptionsPanel pharmacistsPrescriptionsPanel;
+    private javax.swing.JPanel activePanel;
     /**
      * Creates new form PharmacistFrame
      */
@@ -19,6 +24,10 @@ public class PharmacistFrame extends javax.swing.JFrame {
         initComponents();
         pack();
         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
+        username.setText(DataStore.currentUserName);
+        searchField.setVisible(false);
+        searchBtn.setVisible(false);
     }
 
     /**
@@ -31,29 +40,144 @@ public class PharmacistFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
+        searchBtn = new javax.swing.JButton();
+        searchField = new javax.swing.JTextField();
+        username = new javax.swing.JLabel();
+        contentPanel = new javax.swing.JPanel();
+        prescriptionsPanel = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Pharmacist's Dashboard");
+
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(this::btnLogoutActionPerformed);
+
+        searchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/ui/dashboard/search-interface-symbol.png"))); // NOI18N
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(this::searchBtnActionPerformed);
+
+        searchField.setText("Search...");
+        searchField.addActionListener(this::searchFieldActionPerformed);
+
+        username.setText("Dr. (name)");
+
+        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
+        contentPanel.setLayout(contentPanelLayout);
+        contentPanelLayout.setHorizontalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        contentPanelLayout.setVerticalGroup(
+            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
+        );
+
+        prescriptionsPanel.setText("Prescriptions");
+        prescriptionsPanel.addActionListener(this::prescriptionsPanelActionPerformed);
+
+        jButton2.setText("Orders");
+
+        jButton3.setText("Medicines");
+        jButton3.addActionListener(this::jButton3ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(jLabel1)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
+                        .addComponent(username)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(prescriptionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 401, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnLogout)
+                    .addComponent(username))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(prescriptionsPanel)
+                    .addComponent(jButton3)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchBtn)
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+
+        this.dispose();
+         new LoginFrame().setVisible(true);
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        String text = searchField.getText();
+        
+       if (activePanel instanceof PharmacistsPrescriptionsPanel) {
+        ((PharmacistsPrescriptionsPanel) activePanel).filterTable(text);
+    } 
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
+
+    private void prescriptionsPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prescriptionsPanelActionPerformed
+    pharmacistsPrescriptionsPanel = new PharmacistsPrescriptionsPanel();
+        
+
+    contentPanel.removeAll();
+    contentPanel.setLayout(new java.awt.BorderLayout());
+    contentPanel.add(pharmacistsPrescriptionsPanel);
+    
+    contentPanel.revalidate();
+    contentPanel.repaint();
+    
+    
+    activePanel = pharmacistsPrescriptionsPanel;
+    searchField.setVisible(true);
+    searchField.setText("Search for patients...");
+    searchBtn.setVisible(true);
+    this.pack();
+    }//GEN-LAST:event_prescriptionsPanelActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -81,6 +205,14 @@ public class PharmacistFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton prescriptionsPanel;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }
