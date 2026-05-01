@@ -14,13 +14,12 @@ import epharmacysystem.ui.dialogs.EditPatientDialog;
  * @author Zid
  */
 public class DoctorsPatientsPanel extends javax.swing.JPanel {
-    private DataStore ds;
+
     
     /**
      * Creates new form PatientsPanel
      */
     public DoctorsPatientsPanel() {
-        this.ds = ds;
         initComponents();
         loadPatients();
     }
@@ -97,7 +96,7 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
     private void addPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientBtnActionPerformed
         AddPatientDialog dialog = new AddPatientDialog(
         (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
-        true, ds
+        true, DataStore.instance
     );
     dialog.setVisible(true);
 
@@ -123,7 +122,7 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
     EditPatientDialog dialog = new EditPatientDialog(
         (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
         true,
-        ds,
+        DataStore.instance,
         modelRow
     );
 
@@ -153,32 +152,39 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
         if (confirm != javax.swing.JOptionPane.YES_OPTION) return;
 
         // shift array left
-        for (int i = modelRow; i < ds.patientCount - 1; i++) {
-            ds.patients[i] = ds.patients[i + 1];
+        for (int i = modelRow; i < DataStore.patientCount - 1; i++) {
+            DataStore.patients[i] = DataStore.patients[i + 1];
         }
 
-        ds.patientCount--;
+        DataStore.patientCount--;
 
         loadPatients();
 
     }//GEN-LAST:event_deletePatientBtnActionPerformed
 
 private void loadPatients() {
-
+    System.out.println("CURRENT DOCTOR: " + DataStore.currentUserId);
     javax.swing.table.DefaultTableModel model =
         (javax.swing.table.DefaultTableModel) patientsTable.getModel();
 
-    model.setRowCount(0); // clear table
+    model.setRowCount(0); 
+    
+    String currentDoctorId = DataStore.currentUserId;
 
-    for (int i = 0; i < ds.patientCount; i++) {
+    for (int i = 0; i < DataStore.patientCount; i++) {
+        if (DataStore.patients[i][6] == null ||
+            !DataStore.patients[i][6].equals(currentDoctorId)) {
+            continue;
+        }
+
 
         model.addRow(new Object[]{
-            ds.patients[i][0], // ID
-            ds.patients[i][1], // Name
-            ds.patients[i][2], // Age
-            ds.patients[i][3], // Gender
-            ds.patients[i][4], // Ward
-            ds.patients[i][5]  // History
+            DataStore.patients[i][0], // ID
+            DataStore.patients[i][1], // Name
+            DataStore.patients[i][2], // Age
+            DataStore.patients[i][3], // Gender
+            DataStore.patients[i][4], // Ward
+            DataStore.patients[i][5]  // History
         });
     }
 }

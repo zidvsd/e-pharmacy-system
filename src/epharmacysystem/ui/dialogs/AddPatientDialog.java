@@ -14,13 +14,13 @@ import javax.swing.JFrame;
 public class AddPatientDialog extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AddPatientDialog.class.getName());
-    private DataStore ds;
+ 
     /**
      * Creates new form AddPatientDialog
      */
     public AddPatientDialog(java.awt.Frame parent, boolean modal, DataStore ds) {
         super(parent, modal);
-        this.ds = ds;
+     
         initComponents();
     }
 
@@ -174,7 +174,8 @@ public class AddPatientDialog extends javax.swing.JDialog {
                 "Please fill all fields!");
         return;
     }
-
+         
+         System.out.println("Assigned doctor: " + DataStore.currentUserId);
     // 2. Generate ID
     String patientId = String.format("P%03d", DataStore.patientIdCounter);
     String userId = String.format("u%03d", DataStore.users.length + 1);
@@ -202,7 +203,7 @@ public class AddPatientDialog extends javax.swing.JDialog {
         cmbGender.getSelectedItem().toString(),
         txtWard.getText(),
         txtHistory.getText(),
-        userId // 🔥 IMPORTANT LINK
+        DataStore.currentUserId,
     };
 
     DataStore.patientCount++;
