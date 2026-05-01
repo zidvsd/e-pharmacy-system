@@ -17,20 +17,26 @@ public class EditPatientDialog extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditPatientDialog.class.getName());
         private DataStore ds;
-        private int rowIndex;
+        private int rowIndex = -1;
     /**
      * Creates new form AddPatientDialog
      */
-    public EditPatientDialog(java.awt.Frame parent, boolean modal, DataStore ds, int rowIndex) {
+    public EditPatientDialog(java.awt.Frame parent, boolean modal, DataStore ds, String patientId) {
         super(parent, modal);
         this.ds = ds;
-        this.rowIndex = rowIndex;
+        
+       for (int i = 0; i < DataStore.patientCount; i++) {
+            if (ds.patients[i][0] != null && ds.patients[i][0].equals(patientId)) {
+                this.rowIndex = i;
+                break;
+            }
+        }
+       
         initComponents();
         loadData();
     }
     private void loadData() {
         String[] patient = ds.patients[rowIndex];
-
         txtName.setText(patient[1]);
         txtAge.setText(patient[2]);
         cmbGender.setSelectedItem(patient[3]);
@@ -187,7 +193,18 @@ public class EditPatientDialog extends javax.swing.JDialog {
         javax.swing.JOptionPane.showMessageDialog(this, "Please fill all fields!");
         return;
     }
-
+     
+     String associatedUserId = ds.patients[rowIndex][6];
+     
+     if (associatedUserId != null) {
+        for (int i = 0; i < DataStore.users.length; i++) {
+            if (DataStore.users[i][0].equals(associatedUserId)) {
+                // Index 4 in users array is the Full Name
+                DataStore.users[i][4] = txtName.getText();
+                break;
+            }
+        }
+    }
     // UPDATE existing row ONLY
     ds.patients[rowIndex][1] = txtName.getText();
     ds.patients[rowIndex][2] = txtAge.getText();
@@ -225,7 +242,7 @@ public class EditPatientDialog extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                EditPatientDialog dialog = new EditPatientDialog(new javax.swing.JFrame(), true, DataStore.instance, 0);
+                EditPatientDialog dialog = new EditPatientDialog(new javax.swing.JFrame(), true, DataStore.instance, "P001");
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

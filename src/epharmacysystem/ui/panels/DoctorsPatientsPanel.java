@@ -112,20 +112,22 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
 
     private void editPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatientBtnActionPerformed
         
-    int row = patientsTable.getSelectedRow();
+    int selectedRow = patientsTable.getSelectedRow();
 
-    if (row == -1) {
+    if (selectedRow == -1) {
         javax.swing.JOptionPane.showMessageDialog(this, "Select a patient first!");
         return;
     }
 
-    int modelRow = patientsTable.convertRowIndexToModel(row);
-
+    int modelRow = patientsTable.convertRowIndexToModel(selectedRow);
+    
+    String patientId = patientsTable.getModel().getValueAt(modelRow, 0).toString();
+    
     EditPatientDialog dialog = new EditPatientDialog(
         (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
         true,
         DataStore.instance,
-        modelRow
+        patientId
     );
 
     dialog.setLocationRelativeTo(this); 
@@ -175,8 +177,8 @@ private void loadPatients() {
     String currentDoctorId = DataStore.currentUserId;
 
     for (int i = 0; i < DataStore.patientCount; i++) {
-        if (DataStore.patients[i][6] == null ||
-            !DataStore.patients[i][6].equals(currentDoctorId)) {
+        if (DataStore.patients[i][7] == null ||
+            !DataStore.patients[i][7].equals(currentDoctorId)) {
             continue;
         }
 

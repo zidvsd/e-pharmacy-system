@@ -17,7 +17,7 @@ public class DataStore {
     };
  
     // ================= DATA TABLES =================
-    public static String[][] patients = new String[50][9];
+    public static String[][] patients = new String[50][10];
     public static int patientCount = 0;
 
     public static String[][] prescriptions = new String[100][9];
@@ -51,8 +51,8 @@ public class DataStore {
 
     private static void initializeSampleData() {
 
-        patients[0] = new String[]{"P001", "Juan Dela Cruz", "45", "Male", "Ward A", "Diabetes", "u001"};
-        patients[1] = new String[]{"P002", "Maria Santos", "32", "Female", "Ward B", "Hypertension", "u002"};
+        patients[0] = new String[]{"P001", "Juan Dela Cruz", "45", "Male", "Ward A", "Diabetes", "u003", "u001"};
+        patients[1] = new String[]{"P002", "Maria Santos", "32", "Female", "Ward B", "Hypertension", "u004", "u002"};
         patientCount = 2;
 
         patientIdCounter = 3; 

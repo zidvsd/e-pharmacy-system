@@ -162,7 +162,7 @@ public class AddPatientDialog extends javax.swing.JDialog {
         txtHistory.setText("");
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
-
+    
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
          if (txtName.getText().isEmpty()
             || txtAge.getText().isEmpty()
@@ -173,11 +173,11 @@ public class AddPatientDialog extends javax.swing.JDialog {
                 "Please fill all fields!");
         return;
     }
-         
-         System.out.println("Assigned doctor: " + DataStore.currentUserId);
-    // 2. Generate ID
     String patientId = String.format("P%03d", DataStore.patientIdCounter);
-    String userId = String.format("u%03d", DataStore.users.length + 1);
+    // Use a unique ID for the user account based on current users length
+    String userId = "u" + String.format("%03d", DataStore.users.length + 1);
+    // 2. Generate ID
+
     
     String username = txtName.getText().replace(" ", "").toLowerCase();
     String password = "pass123";
@@ -202,6 +202,7 @@ public class AddPatientDialog extends javax.swing.JDialog {
         cmbGender.getSelectedItem().toString(),
         txtWard.getText(),
         txtHistory.getText(),
+        userId,
         DataStore.currentUserId,
     };
 
