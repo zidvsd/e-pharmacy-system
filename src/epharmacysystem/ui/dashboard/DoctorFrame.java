@@ -155,9 +155,9 @@ public class DoctorFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+
         this.dispose();
-          new LoginFrame().setVisible(true);
+        new LoginFrame().setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void patientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientBtnActionPerformed
@@ -217,7 +217,6 @@ public class DoctorFrame extends javax.swing.JFrame {
 
     private void searchBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn1ActionPerformed
       
-        
     }//GEN-LAST:event_searchBtn1ActionPerformed
 
     private void ordersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordersBtnActionPerformed
@@ -225,7 +224,7 @@ public class DoctorFrame extends javax.swing.JFrame {
 
     contentPanel.removeAll();
     contentPanel.setLayout(new java.awt.BorderLayout());
-    contentPanel.add(doctorsOrderPanel);
+    contentPanel.add(doctorsOrderPanel, java.awt.BorderLayout.CENTER);
 
     contentPanel.revalidate();
     contentPanel.repaint();

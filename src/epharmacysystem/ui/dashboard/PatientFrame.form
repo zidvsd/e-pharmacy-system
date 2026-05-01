@@ -49,7 +49,7 @@
                           <Group type="102" attributes="0">
                               <Component id="btnMyPrescriptions" linkSize="1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton3" linkSize="1" max="32767" attributes="0"/>
+                              <Component id="btnMyOrders" linkSize="1" max="32767" attributes="0"/>
                           </Group>
                           <Component id="searchField" max="32767" attributes="0"/>
                       </Group>
@@ -73,7 +73,7 @@
                   <Component id="btnMyProfile" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnMyPrescriptions" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnMyOrders" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -129,12 +129,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMyPrescriptionsActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btnMyOrders">
       <Properties>
         <Property name="text" type="java.lang.String" value="My Orders"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMyOrdersActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLogout">

@@ -24,7 +24,7 @@ public class LoginFrame extends javax.swing.JFrame {
         initComponents();
         txtPassword.setText("");
         pack();
-setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
     }
     /**
      * This method is called from within the constructor to initialize the form.
