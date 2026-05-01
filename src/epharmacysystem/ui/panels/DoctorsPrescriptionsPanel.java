@@ -116,19 +116,28 @@ public class DoctorsPrescriptionsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddPrescriptionActionPerformed
 
     private void btnEditPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPrescriptionActionPerformed
-      int row = prescriptionsTable.getSelectedRow();
-        if (row == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Select a prescription first!");
-            return;
-        }
-
-        int modelRow = prescriptionsTable.convertRowIndexToModel(row);
+      int viewRow = prescriptionsTable.getSelectedRow();
+      
+      if (viewRow == -1) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this, 
+            "Please select a prescription from the table to edit.", 
+            "No Selection", 
+            javax.swing.JOptionPane.WARNING_MESSAGE
+        );
+        return; // Exit the method early
+    }
+      
+      int modelRow = prescriptionsTable.convertRowIndexToModel(viewRow);
+      String prescriptionId =
+      prescriptionsTable.getModel().getValueAt(modelRow, 0).toString();
 
         // Pass ds and modelRow to keep it consistent with Patients pattern
         EditPrescriptionDialog dialog = new EditPrescriptionDialog(
             (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
-            true,DataStore.instance, modelRow
+            true,DataStore.instance, prescriptionId
         );
+         dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
         loadPrescriptions();
     
@@ -190,13 +199,20 @@ public class DoctorsPrescriptionsPanel extends javax.swing.JPanel {
 
     model.setRowCount(0);
 
+    String currentDoctorId = DataStore.currentUserId;
+    
     for (int i = 0; i < DataStore.prescriptionCount; i++) {
 
-        String patientId = DataStore.prescriptions[i][1];
         String doctorId = DataStore.prescriptions[i][2];
+        
+        if (!doctorId.equals(currentDoctorId)) {
+            continue;
+        }
+        
+        String patientId = DataStore.prescriptions[i][1];
 
         String patientName = patientId;
-        String doctorName = doctorId;
+        String doctorName = "";
 
         // find patient name
         for (int j = 0; j < DataStore.patientCount; j++) {

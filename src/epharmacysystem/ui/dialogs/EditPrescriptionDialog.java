@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class EditPrescriptionDialog extends javax.swing.JDialog {
     private DataStore ds;  
-    private int rowIndex = -1;
+    private String prescriptionId;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditPrescriptionDialog.class.getName());
      
@@ -22,38 +22,66 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
     /**
      * Creates new form EditPrescriptionDialog
      */
-    public EditPrescriptionDialog(java.awt.Frame parent, boolean modal, DataStore ds, int rowIndex) {
+    public EditPrescriptionDialog(java.awt.Frame parent, boolean modal, DataStore ds, String prescriptionId) {
         super(parent, modal);
         this.ds = ds;
-        this.rowIndex = rowIndex;
+        this.prescriptionId = prescriptionId;
         initComponents();
         loadData();
     }
 
     private void loadData(){
+         int rowIndex = -1;
+
+    for (int i = 0; i < DataStore.prescriptionCount; i++) {
+        if (DataStore.prescriptions[i][0].equals(prescriptionId)) {
+            rowIndex = i;
+            break;
+        }
+    }
+
+    if (rowIndex == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Prescription not found!");
+        this.dispose();
+        return;
+    }
+
+    String currentDoctorId = DataStore.currentUserId;
+
+    // ===== 2. LOAD PATIENTS (ONLY DOCTOR'S PATIENTS) =====
     cmbPatient.removeAllItems();
+
     for (int i = 0; i < DataStore.patientCount; i++) {
+
+        if (DataStore.patients[i][6] == null ||
+            !DataStore.patients[i][6].equals(currentDoctorId)) {
+            continue;
+        }
+
         String patientId = DataStore.patients[i][0];
         String patientName = DataStore.patients[i][1];
+
         cmbPatient.addItem(patientId + " - " + patientName);
     }
 
-    // 2. Load medicines into combo box
+    // ===== 3. LOAD MEDICINES =====
     cmbMedicine.removeAllItems();
+
     for (int i = 0; i < DataStore.medicineCount; i++) {
-        String medicineName = DataStore.medicines[i][1];
-        cmbMedicine.addItem(medicineName);
+        cmbMedicine.addItem(DataStore.medicines[i][1]);
     }
+
+    // ===== 4. LOAD STATUS =====
     cmbRxStatus.removeAllItems();
     cmbRxStatus.addItem(DataStore.RX_PENDING);
     cmbRxStatus.addItem(DataStore.RX_ACTIVE);
     cmbRxStatus.addItem(DataStore.RX_FULFILLED);
-    
-    // 3. Set selected values from existing prescription
+
+    // ===== 5. GET CURRENT PRESCRIPTION DATA =====
     String patientId = ds.prescriptions[rowIndex][1];
     String medicine = ds.prescriptions[rowIndex][3];
 
-    // select patient
+    // ===== 6. SELECT PATIENT =====
     for (int i = 0; i < cmbPatient.getItemCount(); i++) {
         if (cmbPatient.getItemAt(i).startsWith(patientId + " -")) {
             cmbPatient.setSelectedIndex(i);
@@ -61,13 +89,12 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
         }
     }
 
-    // select medicine
+    // ===== 7. SELECT MEDICINE =====
     cmbMedicine.setSelectedItem(medicine);
 
-    // 4. Fill text fields
+    // ===== 8. FILL FIELDS =====
     txtDosage.setText(ds.prescriptions[rowIndex][4]);
     txtQuantity.setText(ds.prescriptions[rowIndex][5]);
-    
     txtInstructions.setText(ds.prescriptions[rowIndex][8]);
     cmbRxStatus.setSelectedItem(ds.prescriptions[rowIndex][7]);
     }
@@ -218,19 +245,21 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel6.getAccessibleContext().setAccessibleDescription("");
@@ -249,14 +278,32 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
 
     private void btnSavePrescriptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSavePrescriptionMouseClicked
 
-         if (rowIndex < 0) return;
+          int rowIndex = -1;
 
-        ds.prescriptions[rowIndex][1] = cmbPatient.getSelectedItem().toString();
+    for (int i = 0; i < DataStore.prescriptionCount; i++) {
+        if (DataStore.prescriptions[i][0].equals(prescriptionId)) {
+            rowIndex = i;
+            break;
+        }
+    }
+
+    if (rowIndex == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Prescription not found!");
+        return;
+    }
+
+    // ===== FIX PATIENT ID (IMPORTANT BUG FIX) =====
+        String selectedPatient = cmbPatient.getSelectedItem().toString();
+        String patientId = selectedPatient.split(" - ")[0];
+
+        // ===== SAVE =====
+        ds.prescriptions[rowIndex][1] = patientId;
         ds.prescriptions[rowIndex][3] = cmbMedicine.getSelectedItem().toString();
         ds.prescriptions[rowIndex][4] = txtDosage.getText();
         ds.prescriptions[rowIndex][5] = txtQuantity.getText();
         ds.prescriptions[rowIndex][7] = cmbRxStatus.getSelectedItem().toString();
-        ds.prescriptions[rowIndex][8] = txtInstructions.getText(); 
+        ds.prescriptions[rowIndex][8] = txtInstructions.getText();
+
         javax.swing.JOptionPane.showMessageDialog(this, "Prescription updated!");
         dispose();
     }//GEN-LAST:event_btnSavePrescriptionMouseClicked

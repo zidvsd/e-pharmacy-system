@@ -22,6 +22,7 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
     public DoctorsPatientsPanel() {
         initComponents();
         loadPatients();
+        
     }
 
     /**
@@ -98,8 +99,9 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
         (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
         true, DataStore.instance
     );
+    
+        dialog.setLocationRelativeTo(this); // 👈 ADD THIS
     dialog.setVisible(true);
-
     loadPatients(); // refresh table
     }//GEN-LAST:event_addPatientBtnActionPerformed
 
@@ -109,7 +111,7 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_patientsTableMouseClicked
 
     private void editPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatientBtnActionPerformed
-      
+        
     int row = patientsTable.getSelectedRow();
 
     if (row == -1) {
@@ -126,6 +128,7 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
         modelRow
     );
 
+    dialog.setLocationRelativeTo(this); 
     dialog.setVisible(true);
     loadPatients();
 

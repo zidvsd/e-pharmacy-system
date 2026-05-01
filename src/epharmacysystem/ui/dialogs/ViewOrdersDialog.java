@@ -239,19 +239,29 @@ public class ViewOrdersDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 private void loadOrderDetails() {
 
-    for (int i = 0; i < DataStore.orderCount; i++) {
-
+   for (int i = 0; i < DataStore.orderCount; i++) {
         if (DataStore.orders[i][0].equals(orderId)) {
+            String patientId = DataStore.orders[i][1];
+            String patientName = "Unknown Patient";
 
-            lblOrderId.setText(DataStore.orders[i][0]); // Order ID
-            lblPatientId.setText(DataStore.orders[i][1]);   // Patient ID
-            lblRxId.setText(DataStore.orders[i][2]);         // RX ID
+            // Lookup Patient Name using the Patient ID
+            for (int j = 0; j < DataStore.patientCount; j++) {
+                if (DataStore.patients[j][0].equals(patientId)) {
+                    patientName = DataStore.patients[j][1];
+                    break;
+                }
+            }
 
-            lblMedicine.setText(DataStore.orders[i][3]);       // Medicine
-            lblQuantity.setText(DataStore.orders[i][4]);      // Quantity
-            lblOrderStatus.setText(DataStore.orders[i][5]);      // Status
-            lblDate.setText(DataStore.orders[i][6]);      // Date
-            lblTotal.setText(DataStore.orders[i][7]);      // Total Price
+            // Set the Labels
+            lblOrderId.setText(DataStore.orders[i][0]);
+            // Display: Name (ID) for better clarity
+            lblPatientId.setText(patientName + " (" + patientId + ")"); 
+            lblRxId.setText(DataStore.orders[i][2]);
+            lblMedicine.setText(DataStore.orders[i][3]);
+            lblQuantity.setText(DataStore.orders[i][4]);
+            lblOrderStatus.setText(DataStore.orders[i][5]);
+            lblDate.setText(DataStore.orders[i][6]);
+            lblTotal.setText("₱" + DataStore.orders[i][7]); // Added currency symbol
 
             break;
         }

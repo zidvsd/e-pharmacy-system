@@ -4,6 +4,7 @@
  */
 package epharmacysystem.ui.panels;
 
+import epharmacysystem.data.DataStore;
 import epharmacysystem.ui.dialogs.AddPatientDialog;
 import epharmacysystem.ui.dialogs.DoctorCreateOrderDialog;
 import epharmacysystem.ui.dialogs.ViewOrdersDialog;
@@ -90,8 +91,9 @@ public class DoctorsOrdersPanel extends javax.swing.JPanel {
     (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
     true
     );
+    dialog.setLocationRelativeTo(this);
     dialog.setVisible(true);
-
+    
     loadOrders(); 
     }//GEN-LAST:event_btnCreateOrderActionPerformed
 
@@ -111,7 +113,7 @@ public class DoctorsOrdersPanel extends javax.swing.JPanel {
         (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
         true,orderId
         );
-       
+       dialog.setLocationRelativeTo(this); 
         dialog.setVisible(true);    
     }//GEN-LAST:event_btnViewOrderActionPerformed
 
@@ -119,18 +121,26 @@ private void loadOrders() {
 
     javax.swing.table.DefaultTableModel model =
         (javax.swing.table.DefaultTableModel) doctorsOrderTbl.getModel();
+     
+    model.setRowCount(0); 
+    
+    String currentDoctorId = DataStore.currentUserId;
+   
 
-    model.setRowCount(0); // clear table
+    for (int i = 0; i < DataStore.orderCount; i++) {
+        String doctorId = DataStore.orders[i][8];
 
-    for (int i = 0; i < epharmacysystem.data.DataStore.orderCount; i++) {
-
-        String orderId = epharmacysystem.data.DataStore.orders[i][0];
-        String patientId = epharmacysystem.data.DataStore.orders[i][1];
-        String medicine = epharmacysystem.data.DataStore.orders[i][3];
-        String quantity = epharmacysystem.data.DataStore.orders[i][4];
-        String status = epharmacysystem.data.DataStore.orders[i][5];
-        String date = epharmacysystem.data.DataStore.orders[i][6];
-        String total = epharmacysystem.data.DataStore.orders[i][7];
+        if (doctorId == null || !doctorId.equals(currentDoctorId)) {
+            continue;
+        }
+        
+        String orderId = DataStore.orders[i][0];
+        String patientId = DataStore.orders[i][1];
+        String medicine = DataStore.orders[i][3];
+        String quantity = DataStore.orders[i][4];
+        String status = DataStore.orders[i][5];
+        String date = DataStore.orders[i][6];
+        String total = DataStore.orders[i][7];
 
         model.addRow(new Object[]{
             orderId,

@@ -20,13 +20,13 @@ public class DataStore {
     public static String[][] patients = new String[50][9];
     public static int patientCount = 0;
 
-    public static String[][] prescriptions = new String[100][8];
+    public static String[][] prescriptions = new String[100][9];
     public static int prescriptionCount = 0;
 
     public static String[][] medicines = new String[100][7];
     public static int medicineCount = 0;
 
-    public static String[][] orders = new String[100][8];
+    public static String[][] orders = new String[100][9];
     public static int orderCount = 0;
     // ================= ID COUNTERS =================
     public static int patientIdCounter = 1;
@@ -72,22 +72,22 @@ public class DataStore {
 
         orders[0] = new String[]{
         "ORD001", "P001", "RX001", "Paracetamol", "20",
-        ORDER_PENDING, "2026-04-29", "65.00"
+        ORDER_PENDING, "2026-04-29", "65.00", "u001"
         };
-
+         
         orders[1] = new String[]{
             "ORD002", "P002", "RX002", "Amoxicillin", "12",
-            ORDER_APPROVED, "2026-04-29", "144.00"
+            ORDER_APPROVED, "2026-04-29", "144.00", "u002"
         };
 
         orders[2] = new String[]{
             "ORD003", "P001", "RX001", "Paracetamol", "10",
-            ORDER_REJECTED, "2026-04-30", "32.50"
+            ORDER_REJECTED, "2026-04-30", "32.50", "u001"
         };
 
         orders[3] = new String[]{
             "ORD004", "P002", "RX002", "Amoxicillin", "6",
-            ORDER_PENDING, "2026-04-30", "72.00"
+            ORDER_PENDING, "2026-04-30", "72.00", "u002"
         };
 
         orderCount = 4;
