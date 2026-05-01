@@ -238,19 +238,18 @@ public class AddPrescriptionDialog extends javax.swing.JDialog {
     }
     
     private void loadPatients() {
-
-    cmbPatient.removeAllItems(); // clear first
+    cmbPatient.removeAllItems(); 
     String currentDoctorId = DataStore.currentUserId; 
     
     for (int i = 0; i < DataStore.patientCount; i++) {
-        if (DataStore.patients[i][6] == null ||
-            !DataStore.patients[i][6].equals(currentDoctorId)) {
-            continue;
-        }
-        String patientId = DataStore.patients[i][0];
-        String patientName = DataStore.patients[i][1];
+        if (DataStore.patients[i][7] != null && 
+            DataStore.patients[i][7].equals(currentDoctorId)) {
+            
+            String patientId = DataStore.patients[i][0];
+            String patientName = DataStore.patients[i][1];
 
-        cmbPatient.addItem(patientId + " - " + patientName);
+            cmbPatient.addItem(patientId + " - " + patientName);
+      }
     }
 }
     /**

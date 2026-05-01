@@ -68,9 +68,8 @@ public class DoctorsOrdersPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnCreateOrder)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnViewOrder)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnViewOrder)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

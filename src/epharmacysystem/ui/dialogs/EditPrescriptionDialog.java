@@ -53,8 +53,8 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
 
     for (int i = 0; i < DataStore.patientCount; i++) {
 
-        if (DataStore.patients[i][6] == null ||
-            !DataStore.patients[i][6].equals(currentDoctorId)) {
+        if (DataStore.patients[i][7] == null ||
+            !DataStore.patients[i][7].equals(currentDoctorId)) {
             continue;
         }
 
