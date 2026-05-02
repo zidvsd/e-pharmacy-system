@@ -6,6 +6,8 @@ package epharmacysystem.ui.dashboard;
 
 import epharmacysystem.data.DataStore;
 import epharmacysystem.ui.auth.LoginFrame;
+import epharmacysystem.ui.panels.PharmacistsMedicinesPanel;
+import epharmacysystem.ui.panels.PharmacistsOrdersPanel;
 import epharmacysystem.ui.panels.PharmacistsPrescriptionsPanel;
 
 /**
@@ -16,6 +18,8 @@ public class PharmacistFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PharmacistFrame.class.getName());
     private PharmacistsPrescriptionsPanel pharmacistsPrescriptionsPanel;
+       private PharmacistsMedicinesPanel pharmacistsMedicinesPanel;
+       private PharmacistsOrdersPanel pharmacistsOrdersPanel;
     private javax.swing.JPanel activePanel;
     /**
      * Creates new form PharmacistFrame
@@ -46,8 +50,8 @@ public class PharmacistFrame extends javax.swing.JFrame {
         username = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         prescriptionsPanel = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        ordersPanel = new javax.swing.JButton();
+        medicinesPanel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,10 +84,11 @@ public class PharmacistFrame extends javax.swing.JFrame {
         prescriptionsPanel.setText("Prescriptions");
         prescriptionsPanel.addActionListener(this::prescriptionsPanelActionPerformed);
 
-        jButton2.setText("Orders");
+        ordersPanel.setText("Orders");
+        ordersPanel.addActionListener(this::ordersPanelActionPerformed);
 
-        jButton3.setText("Medicines");
-        jButton3.addActionListener(this::jButton3ActionPerformed);
+        medicinesPanel.setText("Medicines");
+        medicinesPanel.addActionListener(this::medicinesPanelActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,12 +110,13 @@ public class PharmacistFrame extends javax.swing.JFrame {
                             .addComponent(prescriptionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
                         .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 217, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(medicinesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ordersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,8 +130,8 @@ public class PharmacistFrame extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prescriptionsPanel)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(medicinesPanel)
+                    .addComponent(ordersPanel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchBtn)
@@ -150,6 +156,12 @@ public class PharmacistFrame extends javax.swing.JFrame {
        if (activePanel instanceof PharmacistsPrescriptionsPanel) {
         ((PharmacistsPrescriptionsPanel) activePanel).filterTable(text);
     } 
+       else if( activePanel instanceof PharmacistsMedicinesPanel){
+           ((PharmacistsMedicinesPanel) activePanel).filterTable(text);
+       }
+       else if( activePanel instanceof PharmacistsOrdersPanel){
+           ((PharmacistsOrdersPanel) activePanel).filterTable(text);
+       }
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
@@ -175,9 +187,43 @@ public class PharmacistFrame extends javax.swing.JFrame {
     this.pack();
     }//GEN-LAST:event_prescriptionsPanelActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void medicinesPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicinesPanelActionPerformed
+   pharmacistsMedicinesPanel = new PharmacistsMedicinesPanel();
+        
+
+    contentPanel.removeAll();
+    contentPanel.setLayout(new java.awt.BorderLayout());
+    contentPanel.add(pharmacistsMedicinesPanel);
+    
+    contentPanel.revalidate();
+    contentPanel.repaint();
+    
+    
+    activePanel = pharmacistsMedicinesPanel;
+    searchField.setVisible(true);
+    searchField.setText("Search for medicines...");
+    searchBtn.setVisible(true);
+    this.pack();
+    }//GEN-LAST:event_medicinesPanelActionPerformed
+
+    private void ordersPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordersPanelActionPerformed
+    pharmacistsOrdersPanel = new PharmacistsOrdersPanel();
+        
+
+    contentPanel.removeAll();
+    contentPanel.setLayout(new java.awt.BorderLayout());
+    contentPanel.add( pharmacistsOrdersPanel);
+    
+    contentPanel.revalidate();
+    contentPanel.repaint();
+    
+    
+    activePanel =  pharmacistsOrdersPanel;
+    searchField.setVisible(true);
+    searchField.setText("Search for medicines...");
+    searchBtn.setVisible(true);
+    this.pack();
+    }//GEN-LAST:event_ordersPanelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,9 +253,9 @@ public class PharmacistFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton medicinesPanel;
+    private javax.swing.JButton ordersPanel;
     private javax.swing.JButton prescriptionsPanel;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchField;

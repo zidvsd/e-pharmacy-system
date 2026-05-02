@@ -10,12 +10,12 @@ import epharmacysystem.data.DataStore;
  *
  * @author Zid
  */
-public class ProfilePanel extends javax.swing.JPanel {
+public class MyProfilePanel extends javax.swing.JPanel {
 
     /**
      * Creates new form ProfilePanel
      */
-    public ProfilePanel() {
+    public MyProfilePanel() {
         initComponents();
         loadPatientData();
         System.out.println("CurrentUserId: " + DataStore.currentUserId);

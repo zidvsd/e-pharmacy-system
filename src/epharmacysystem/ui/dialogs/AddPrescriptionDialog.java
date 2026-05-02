@@ -187,7 +187,10 @@ public class AddPrescriptionDialog extends javax.swing.JDialog {
         javax.swing.JOptionPane.showMessageDialog(this, "Fill all fields!");
         return;
     }
-          
+        if (!txtQuantity.getText().matches("\\d+")) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Quantiy must be a valid price (e.g., 10)!");
+        return;
+        }
         String selected = cmbPatient.getSelectedItem().toString();
         
         String patientId = selected.split(" - ")[0];

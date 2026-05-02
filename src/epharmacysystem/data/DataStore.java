@@ -40,6 +40,7 @@ public class DataStore {
 
     public static final String ORDER_PENDING = "Pending";
     public static final String ORDER_APPROVED = "Approved";
+    public static final String ORDER_DELIVERED = "Delivered";
     public static final String ORDER_REJECTED = "Rejected";
     
     public static DataStore instance;

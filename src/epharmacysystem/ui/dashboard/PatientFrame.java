@@ -10,7 +10,7 @@ import epharmacysystem.ui.panels.MyOrdersPanel;
 import epharmacysystem.ui.panels.MyPrescriptionsPanel;
 
 
-import epharmacysystem.ui.panels.ProfilePanel;
+import epharmacysystem.ui.panels.MyProfilePanel;
 
 /**
  *
@@ -19,7 +19,7 @@ import epharmacysystem.ui.panels.ProfilePanel;
 public class PatientFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PatientFrame.class.getName());
-    private ProfilePanel profilePanel;
+    private MyProfilePanel profilePanel;
     private MyPrescriptionsPanel myPrescriptionsPanel;
     private MyOrdersPanel myOrdersPanel;
     private javax.swing.JPanel activePanel;
@@ -149,7 +149,7 @@ public class PatientFrame extends javax.swing.JFrame {
 
     private void btnMyProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileActionPerformed
         // TODO add your handling code here:
-    profilePanel = new ProfilePanel(); 
+    profilePanel = new MyProfilePanel(); 
 
     contentPanel.removeAll();
     contentPanel.setLayout(new java.awt.BorderLayout());
