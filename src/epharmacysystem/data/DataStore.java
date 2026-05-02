@@ -37,7 +37,8 @@ public class DataStore {
     public static final String RX_PENDING = "Pending";
     public static final String RX_ACTIVE = "Active";
     public static final String RX_FULFILLED = "Fulfilled";
-
+    public static final String RX_CANCELLED = "Cancelled";
+    
     public static final String ORDER_PENDING = "Pending";
     public static final String ORDER_APPROVED = "Approved";
     public static final String ORDER_DELIVERED = "Delivered";

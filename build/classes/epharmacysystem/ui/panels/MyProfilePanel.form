@@ -154,7 +154,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="txtPatientHistory">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel7"/>
+            <Property name="text" type="java.lang.String" value="history"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">

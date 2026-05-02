@@ -266,7 +266,7 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
                 DataStore.orderCount++;
                 DataStore.orderIdCounter++;
 
-                DataStore.prescriptions[i][7] = DataStore.RX_ACTIVE;
+         
 
                 javax.swing.JOptionPane.showMessageDialog(this, "Order placed!");
 

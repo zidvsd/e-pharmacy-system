@@ -85,7 +85,7 @@ public class PharmacistsOrdersPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-public void filterTable(String text) {
+    public void filterTable(String text) {
 
     javax.swing.table.DefaultTableModel model =
         (javax.swing.table.DefaultTableModel) pharmacistsOrderTbl.getModel();

@@ -51,7 +51,7 @@ public class EditOrderStatusDialog extends javax.swing.JDialog {
             return;
         }
         
- String pId = DataStore.orders[rowIndex][1]; // Patient ID (e.g., "P001")
+    String pId = DataStore.orders[rowIndex][1]; // Patient ID (e.g., "P001")
     String mName = DataStore.orders[rowIndex][3]; // Medicine Name (Your orders already store the Name here)
     String dId = DataStore.orders[rowIndex][8]; // Doctor User ID (e.g., "u001")
 
@@ -277,23 +277,45 @@ public class EditOrderStatusDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-       int rowIndex = -1;
-        for (int i = 0; i < DataStore.orderCount; i++) {
-            if (DataStore.orders[i][0].equals(this.orderId)) {
-                rowIndex = i;
-                break;
+      int orderRowIndex = -1;
+    for (int i = 0; i < DataStore.orderCount; i++) {
+        if (DataStore.orders[i][0].equals(this.orderId)) {
+            orderRowIndex = i;
+            break;
+        }
+    }
+
+    if (orderRowIndex != -1) {
+        String newOrderStatus = cmbOrderStatus.getSelectedItem().toString();
+        String linkedRxId = DataStore.orders[orderRowIndex][2]; // Get the RX ID
+
+        // 1. Update the Order Status
+        DataStore.orders[orderRowIndex][5] = newOrderStatus;
+
+        // 2. Find and Update the linked Prescription
+        for (int j = 0; j < DataStore.prescriptionCount; j++) {
+            if (DataStore.prescriptions[j][0].equals(linkedRxId)) {
+                
+                // Change status to ACTIVE if order is APPROVED
+                if (newOrderStatus.equals(DataStore.ORDER_APPROVED)) {
+                    DataStore.prescriptions[j][7] = DataStore.RX_ACTIVE;
+                } 
+                // Change status to FULFILLED if order is DELIVERED
+                else if (newOrderStatus.equals(DataStore.ORDER_DELIVERED)) {
+                    DataStore.prescriptions[j][7] = DataStore.RX_FULFILLED;
+                }
+                else if (newOrderStatus.equals(DataStore.ORDER_REJECTED)) {
+                    DataStore.prescriptions[j][7] = DataStore.RX_CANCELLED;
+                }
+
+                break; 
             }
         }
 
-        if (rowIndex != -1) {
-            // Update only the status column (Index 5)
-            String newStatus = cmbOrderStatus.getSelectedItem().toString();
-            DataStore.orders[rowIndex][5] = newStatus;
-
-            JOptionPane.showMessageDialog(this, "Order status updated to: " + newStatus);
-            this.dispose();
-            }
-        
+        JOptionPane.showMessageDialog(this, "Order updated to: " + newOrderStatus + 
+                "\nLinked Prescription " + linkedRxId + " status updated accordingly.");
+        this.dispose();
+    }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

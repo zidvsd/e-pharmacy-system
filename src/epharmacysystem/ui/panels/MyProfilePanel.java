@@ -83,7 +83,7 @@ System.out.println("BEFORE LABEL: " + txtPatientName.getText());
 
         txtPatientWard.setText("ward");
 
-        txtPatientHistory.setText("jLabel7");
+        txtPatientHistory.setText("history");
 
         jLabel1.setText("PERSONAL INFO");
 
