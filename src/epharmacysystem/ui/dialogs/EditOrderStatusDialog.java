@@ -277,7 +277,9 @@ public class EditOrderStatusDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-      int orderRowIndex = -1;
+        int orderRowIndex = -1;
+
+    // 1. Find the actual index of the order in DataStore
     for (int i = 0; i < DataStore.orderCount; i++) {
         if (DataStore.orders[i][0].equals(this.orderId)) {
             orderRowIndex = i;
@@ -285,37 +287,71 @@ public class EditOrderStatusDialog extends javax.swing.JDialog {
         }
     }
 
+    // 2. Only proceed if the order was found
     if (orderRowIndex != -1) {
-        String newOrderStatus = cmbOrderStatus.getSelectedItem().toString();
-        String linkedRxId = DataStore.orders[orderRowIndex][2]; // Get the RX ID
+        String oldStatus = DataStore.orders[orderRowIndex][5];
+        String newStatus = cmbOrderStatus.getSelectedItem().toString();
+        String medicineName = DataStore.orders[orderRowIndex][3];
+        int orderQty = Integer.parseInt(DataStore.orders[orderRowIndex][4]);
+        String linkedRxId = DataStore.orders[orderRowIndex][2];
 
-        // 1. Update the Order Status
-        DataStore.orders[orderRowIndex][5] = newOrderStatus;
+        // 1. STOCK VALIDATION: Only check if moving TO Approved
+        if (newStatus.equals(DataStore.ORDER_APPROVED) && !oldStatus.equals(DataStore.ORDER_APPROVED)) {
+            for (int m = 0; m < DataStore.medicineCount; m++) {
+                if (DataStore.medicines[m][1].equals(medicineName)) {
+                    int currentStock = Integer.parseInt(DataStore.medicines[m][2]);
 
-        // 2. Find and Update the linked Prescription
+                    if (currentStock < orderQty) {
+                        JOptionPane.showMessageDialog(this, 
+                            "Cannot Approve Order!\n" +
+                            "Medicine: " + medicineName + "\n" +
+                            "Available Stock: " + currentStock + "\n" +
+                            "Requested: " + orderQty, 
+                            "Insufficient Stock", JOptionPane.ERROR_MESSAGE);
+                        return; // Stop execution
+                    }
+                    break;
+                }
+            }
+        }
+
+        // 2. STOCK ADJUSTMENT
+        for (int m = 0; m < DataStore.medicineCount; m++) {
+            if (DataStore.medicines[m][1].equals(medicineName)) {
+                int currentStock = Integer.parseInt(DataStore.medicines[m][2]);
+
+                if (newStatus.equals(DataStore.ORDER_APPROVED) && !oldStatus.equals(DataStore.ORDER_APPROVED)) {
+                    DataStore.medicines[m][2] = String.valueOf(currentStock - orderQty);
+                }
+                else if (newStatus.equals(DataStore.ORDER_REJECTED) && oldStatus.equals(DataStore.ORDER_APPROVED)) {
+                    DataStore.medicines[m][2] = String.valueOf(currentStock + orderQty);
+                }
+                break;
+            }
+        }
+
+        // 3. UPDATE ORDER STATUS
+        DataStore.orders[orderRowIndex][5] = newStatus;
+
+        // 4. UPDATE LINKED PRESCRIPTION STATUS
         for (int j = 0; j < DataStore.prescriptionCount; j++) {
             if (DataStore.prescriptions[j][0].equals(linkedRxId)) {
-                
-                // Change status to ACTIVE if order is APPROVED
-                if (newOrderStatus.equals(DataStore.ORDER_APPROVED)) {
+                if (newStatus.equals(DataStore.ORDER_APPROVED)) {
                     DataStore.prescriptions[j][7] = DataStore.RX_ACTIVE;
                 } 
-                // Change status to FULFILLED if order is DELIVERED
-                else if (newOrderStatus.equals(DataStore.ORDER_DELIVERED)) {
+                else if (newStatus.equals(DataStore.ORDER_DELIVERED)) {
                     DataStore.prescriptions[j][7] = DataStore.RX_FULFILLED;
                 }
-                else if (newOrderStatus.equals(DataStore.ORDER_REJECTED)) {
+                else if (newStatus.equals(DataStore.ORDER_REJECTED)) {
                     DataStore.prescriptions[j][7] = DataStore.RX_CANCELLED;
                 }
-
                 break; 
             }
         }
 
-        JOptionPane.showMessageDialog(this, "Order updated to: " + newOrderStatus + 
-                "\nLinked Prescription " + linkedRxId + " status updated accordingly.");
+        JOptionPane.showMessageDialog(this, "Order updated to: " + newStatus);
         this.dispose();
-    }
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
