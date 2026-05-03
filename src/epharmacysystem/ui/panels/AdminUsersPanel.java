@@ -6,6 +6,7 @@ package epharmacysystem.ui.panels;
 
 import epharmacysystem.data.DataStore;
 import epharmacysystem.ui.dialogs.AddUserDialog;
+import epharmacysystem.ui.dialogs.ChangePasswordDialog;
 import epharmacysystem.ui.dialogs.EditPatientDialog;
 import epharmacysystem.ui.dialogs.EditUserDialog;
 
@@ -15,7 +16,7 @@ import epharmacysystem.ui.dialogs.EditUserDialog;
  * @author Zid
  */
 public class AdminUsersPanel extends javax.swing.JPanel {
-
+  
     
     /**
      * Creates new form PatientsPanel
@@ -39,7 +40,7 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         usersTable = new javax.swing.JTable();
         addPatientBtn = new javax.swing.JButton();
         editPatientBtn = new javax.swing.JButton();
-        deletePatientBtn = new javax.swing.JButton();
+        deleteUserBtn = new javax.swing.JButton();
         changePasswordBtn = new javax.swing.JButton();
 
         usersTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -66,8 +67,8 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         editPatientBtn.setText("Edit User");
         editPatientBtn.addActionListener(this::editPatientBtnActionPerformed);
 
-        deletePatientBtn.setText("Delete User");
-        deletePatientBtn.addActionListener(this::deletePatientBtnActionPerformed);
+        deleteUserBtn.setText("Delete User");
+        deleteUserBtn.addActionListener(this::deleteUserBtnActionPerformed);
 
         changePasswordBtn.setText("Change User Password");
         changePasswordBtn.addActionListener(this::changePasswordBtnActionPerformed);
@@ -82,7 +83,7 @@ public class AdminUsersPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(editPatientBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(deletePatientBtn)
+                .addComponent(deleteUserBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(changePasswordBtn))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
@@ -95,7 +96,7 @@ public class AdminUsersPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addPatientBtn)
                     .addComponent(editPatientBtn)
-                    .addComponent(deletePatientBtn)
+                    .addComponent(deleteUserBtn)
                     .addComponent(changePasswordBtn))
                 .addContainerGap())
         );
@@ -107,7 +108,7 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         true, DataStore.instance
     );
     
-        dialog.setLocationRelativeTo(this); 
+    dialog.setLocationRelativeTo(this); 
     dialog.setVisible(true);
     loadUsers(); // refresh table
     }//GEN-LAST:event_addPatientBtnActionPerformed
@@ -143,39 +144,94 @@ public class AdminUsersPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_editPatientBtnActionPerformed
 
-    private void deletePatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatientBtnActionPerformed
+    private void deleteUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserBtnActionPerformed
 
         int row = usersTable.getSelectedRow();
 
-        if (row == -1) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Select a patient first!");
-            return;
+    if (row == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please select a user to delete!");
+        return;
+    }
+
+    int modelRow = usersTable.convertRowIndexToModel(row);
+    
+    // Get the User ID and Role from the table before deleting
+    // Assuming Column 0 is User ID and Column 3 is Role
+    String userIdToDelete = usersTable.getModel().getValueAt(modelRow, 0).toString();
+    String role = usersTable.getModel().getValueAt(modelRow, 3).toString();
+
+    // Prevent Admin from deleting themselves (Safety Check)
+    // Assuming 'currentUser' is the ID of the person logged in
+    // if (userIdToDelete.equals(currentUser)) { 
+    //    javax.swing.JOptionPane.showMessageDialog(this, "You cannot delete your own account!");
+    //    return;
+    // }
+
+    int confirm = javax.swing.JOptionPane.showConfirmDialog(
+        this,
+        "Are you sure you want to delete user " + userIdToDelete + "?\nThis action cannot be undone.",
+        "Confirm Deletion",
+        javax.swing.JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirm != javax.swing.JOptionPane.YES_OPTION) return;
+
+    // 1. DELETE FROM USERS ARRAY (The Login Account)
+    for (int i = 0; i < DataStore.userCount; i++) {
+        if (DataStore.users[i][0].equals(userIdToDelete)) {
+            // Shift users array left
+            for (int j = i; j < DataStore.userCount - 1; j++) {
+                DataStore.users[j] = DataStore.users[j + 1];
+            }
+            DataStore.users[DataStore.userCount - 1] = null; // Clear last reference
+            DataStore.userCount--;
+            break;
         }
+    }
 
-        int modelRow = usersTable.convertRowIndexToModel(row);
-
-        int confirm = javax.swing.JOptionPane.showConfirmDialog(
-            this,
-            "Are you sure you want to delete this patient?",
-            "Confirm Delete",
-            javax.swing.JOptionPane.YES_NO_OPTION
-        );
-
-        if (confirm != javax.swing.JOptionPane.YES_OPTION) return;
-
-        // shift array left
-        for (int i = modelRow; i < DataStore.patientCount - 1; i++) {
-            DataStore.patients[i] = DataStore.patients[i + 1];
+    // 2. IF PATIENT, DELETE FROM PATIENTS ARRAY (The Medical Record)
+    if (role.equalsIgnoreCase(DataStore.ROLE_PATIENT)) {
+        for (int i = 0; i < DataStore.patientCount; i++) {
+            // Index 6 in patients array is the linked UserID
+            if (DataStore.patients[i][6].equals(userIdToDelete)) {
+                // Shift patients array left
+                for (int j = i; j < DataStore.patientCount - 1; j++) {
+                    DataStore.patients[j] = DataStore.patients[j + 1];
+                }
+                DataStore.patients[DataStore.patientCount - 1] = null;
+                DataStore.patientCount--;
+                break;
+            }
         }
+    }
 
-        DataStore.patientCount--;
-
-        loadUsers();
-
-    }//GEN-LAST:event_deletePatientBtnActionPerformed
+    // 3. Refresh UI
+    loadUsers();
+    javax.swing.JOptionPane.showMessageDialog(this, "User and associated records deleted.");
+    }//GEN-LAST:event_deleteUserBtnActionPerformed
 
     private void changePasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordBtnActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = usersTable.getSelectedRow();
+
+    if (selectedRow == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Select a patient first!");
+        return;
+    }
+
+    int modelRow = usersTable.convertRowIndexToModel(selectedRow);
+    
+    String userId = usersTable.getModel().getValueAt(modelRow, 0).toString();
+    
+    ChangePasswordDialog dialog = new ChangePasswordDialog(
+        (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
+        true,
+        DataStore.instance,
+        userId
+    );
+
+    dialog.setLocationRelativeTo(this); 
+    dialog.setVisible(true);
+    loadUsers();
     }//GEN-LAST:event_changePasswordBtnActionPerformed
 
 private void loadUsers() {
@@ -188,9 +244,6 @@ private void loadUsers() {
 
 
     for (int i = 0; i < DataStore.userCount; i++) {
-        
-
-
         model.addRow(new Object[]{
             DataStore.users[i][0], // ID
             DataStore.users[i][1], // username
@@ -221,7 +274,7 @@ public void filterTable(String text) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPatientBtn;
     private javax.swing.JButton changePasswordBtn;
-    private javax.swing.JButton deletePatientBtn;
+    private javax.swing.JButton deleteUserBtn;
     private javax.swing.JButton editPatientBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable usersTable;

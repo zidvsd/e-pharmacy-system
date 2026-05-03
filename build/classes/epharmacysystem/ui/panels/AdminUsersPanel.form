@@ -22,7 +22,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="editPatientBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="deletePatientBtn" min="-2" max="-2" attributes="0"/>
+              <Component id="deleteUserBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="changePasswordBtn" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -37,7 +37,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="addPatientBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="editPatientBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="deletePatientBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteUserBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="changePasswordBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -113,12 +113,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editPatientBtnActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="deletePatientBtn">
+    <Component class="javax.swing.JButton" name="deleteUserBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete User"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deletePatientBtnActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteUserBtnActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="changePasswordBtn">

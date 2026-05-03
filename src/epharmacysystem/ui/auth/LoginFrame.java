@@ -152,7 +152,9 @@ public class LoginFrame extends javax.swing.JFrame {
 
         boolean found = false;
 
-        for (int i = 0; i < DataStore.users.length; i++){
+        for (int i = 0; i < DataStore.userCount; i++){
+            if (DataStore.users[i] == null) continue;
+            
             String storedUsername = DataStore.users[i][1];
             String storedPassword = DataStore.users[i][2];
             String role = DataStore.users[i][3];
