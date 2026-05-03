@@ -23,7 +23,7 @@ public class DataStore {
     public static String[][] medicines = new String[100][7];
     public static int medicineCount = 0;
 
-    public static String[][] orders = new String[100][9];
+    public static String[][] orders = new String[100][10];
     public static int orderCount = 0;
     // ================= ID COUNTERS =================
     public static int userIdCounter = 1;
@@ -88,24 +88,24 @@ public class DataStore {
         prescriptionCount = 2;
         prescriptionIdCounter = 3;
 
-        orders[0] = new String[]{
-        "ORD001", "P001", "RX001", "Paracetamol", "20",
-        ORDER_PENDING, "2026-04-29", "65.00", "u001"
+       orders[0] = new String[]{
+            "ORD001", "P001", "RX001", "Paracetamol", "20",
+            ORDER_PENDING, "2026-04-29", "65.00", "u001", "Ward A"
         };
-         
+          
         orders[1] = new String[]{
             "ORD002", "P002", "RX002", "Amoxicillin", "12",
-            ORDER_APPROVED, "2026-04-29", "144.00", "u002"
+            ORDER_APPROVED, "2026-04-29", "144.00", "u002", "Ward B"
         };
 
         orders[2] = new String[]{
             "ORD003", "P001", "RX001", "Paracetamol", "10",
-            ORDER_REJECTED, "2026-04-30", "32.50", "u001"
+            ORDER_REJECTED, "2026-04-30", "32.50", "u001", "Ward A"
         };
 
         orders[3] = new String[]{
             "ORD004", "P002", "RX002", "Amoxicillin", "6",
-            ORDER_PENDING, "2026-04-30", "72.00", "u002"
+            ORDER_PENDING, "2026-04-30", "72.00", "u002", "Ward B"
         };
 
         orderCount = 4;
@@ -120,7 +120,7 @@ public class DataStore {
         medicines[0] = new String[]{"MED001", "Aspirin", "100", "5.50", "2026-12-31", "Bayer", "Pain reliever"};
         medicines[1] = new String[]{"MED002", "Paracetamol", "150", "3.25", "2027-06-30", "GSK", "Fever reducer"};
         medicines[2] = new String[]{"MED003", "Amoxicillin", "80", "12.00", "2026-08-15", "Pfizer", "Antibiotic"};
-        medicines[3] = new String[]{"MED004", "Ibuprofen", "120", "4.75", "2027-03-20", "J&J", "Anti-inflammatory"};
+        medicines[3] = new String[]{"MED004", "Ibuprofen", "120", "4.75", "2027-03-20", "J&J", "Anti-inflammatory",};
 
         medicineCount = 4;
         medicineIdCounter = 5;

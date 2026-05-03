@@ -45,11 +45,14 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
         jLabel19 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtPatientName = new javax.swing.JLabel();
+        txtWard = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtMedicineName = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        txtPatientName = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
         btnPlaceOrder = new javax.swing.JButton();
@@ -63,15 +66,15 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
 
         jLabel7.setText("Auto-calculated:");
 
-        txtOrderQuantity.setText("orderQuantity");
+        txtOrderQuantity.setText("0");
 
         jLabel9.setText("Total Price:");
 
         txtUnitPrice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        txtUnitPrice.setText("unitPrice");
+        txtUnitPrice.setText("0");
 
         txtTotalPrice.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        txtTotalPrice.setText("totalPrice");
+        txtTotalPrice.setText("0");
 
         jLabel18.setText("Unit Price:");
 
@@ -87,19 +90,16 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
                     .addComponent(jLabel19))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txtOrderQuantity))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0))
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtOrderQuantity))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,15 +124,19 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
 
         jLabel5.setText("Patient Name:");
 
-        txtPatientName.setText("patientName");
+        txtWard.setText("N/A");
 
         jLabel14.setText("Medicine:");
 
-        txtMedicineName.setText("medicineName");
+        txtMedicineName.setText("N/A");
 
         jLabel16.setText("Rx Quantity:");
 
-        txtQuantity.setText("rxQuantity");
+        txtQuantity.setText("0");
+
+        jLabel1.setText("Ward:");
+
+        txtPatientName.setText("N/A");
 
         javax.swing.GroupLayout addDoctorOrderPanelLayout = new javax.swing.GroupLayout(addDoctorOrderPanel);
         addDoctorOrderPanel.setLayout(addDoctorOrderPanelLayout);
@@ -141,7 +145,7 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
             .addGroup(addDoctorOrderPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(addDoctorOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addDoctorOrderPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
@@ -158,6 +162,11 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtQuantity))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addDoctorOrderPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtWard))
+                    .addComponent(jSeparator1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -171,9 +180,9 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
-                .addGroup(addDoctorOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(addDoctorOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(txtPatientName))
+                    .addComponent(txtPatientName, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(addDoctorOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -182,9 +191,15 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
                 .addGroup(addDoctorOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(txtQuantity))
-                .addGap(17, 17, 17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(addDoctorOrderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtWard))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -222,7 +237,7 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addDoctorOrderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnPlaceOrder))
@@ -250,7 +265,15 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
                 String medicine = DataStore.prescriptions[i][3];
                 String quantity = txtOrderQuantity.getText();
                 String total = txtTotalPrice.getText();
-
+                
+                String ward = "Unknown"; 
+                for (int p = 0; p < DataStore.patientCount; p++) {
+                    if (DataStore.patients[p][0].equals(patientId)) {
+                        ward = DataStore.patients[p][4];
+                        break;
+                    }
+                }
+                
                 String orderId = "ORD" + String.format("%03d", DataStore.orderIdCounter);
 
                 DataStore.orders[DataStore.orderCount][0] = orderId;
@@ -318,7 +341,8 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
         });
     }
    private void loadSelectedPrescription() {
-
+      
+               
     String selected = (String) cmbPrescription.getSelectedItem();
     if (selected == null) return;
 
@@ -333,18 +357,20 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
             String rxQty = DataStore.prescriptions[i][5];
 
             // ================= PATIENT NAME (INLINE) =================
+            String patientWard ="";
             String patientName = "";
             for (int p = 0; p < DataStore.patientCount; p++) {
                 if (DataStore.patients[p][0].equals(patientId)) {
                     patientName = DataStore.patients[p][1];
+                    patientWard = DataStore.patients[p][4];
                     break;
                 }
             }
-
             txtPatientName.setText(patientName);
+            txtWard.setText(patientWard);
             txtMedicineName.setText(medicine);
             txtQuantity.setText(rxQty);
-
+            
             // ================= UNIT PRICE (INLINE) =================
             double unitPrice = 0;
             for (int m = 0; m < DataStore.medicineCount; m++) {
@@ -385,7 +411,7 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
             String rxId = DataStore.prescriptions[i][0];
             String medicine = DataStore.prescriptions[i][3];
             String patientId = DataStore.prescriptions[i][1];
-
+            
             cmbPrescription.addItem(rxId + " - " + medicine + " (" + patientId + ")");
         }
     }
@@ -395,6 +421,7 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnPlaceOrder;
     private javax.swing.JComboBox<String> cmbPrescription;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
@@ -406,11 +433,13 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel txtMedicineName;
     private javax.swing.JLabel txtOrderQuantity;
     private javax.swing.JLabel txtPatientName;
     private javax.swing.JLabel txtQuantity;
     private javax.swing.JLabel txtTotalPrice;
     private javax.swing.JLabel txtUnitPrice;
+    private javax.swing.JLabel txtWard;
     // End of variables declaration//GEN-END:variables
 }

@@ -42,13 +42,13 @@ public class DoctorsOrdersPanel extends javax.swing.JPanel {
 
         doctorsOrderTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Order ID", "Patient", "Medicine", "Quantity", "Total Price", "Status", "Date"
+                "Order ID", "Patient", "Medicine", "Quantity", "Total Price", "Ward", "Status", "Date"
             }
         ));
         jScrollPane1.setViewportView(doctorsOrderTbl);
@@ -140,6 +140,7 @@ private void loadOrders() {
         String status = DataStore.orders[i][5];
         String date = DataStore.orders[i][6];
         String total = DataStore.orders[i][7];
+        String ward = DataStore.orders[i][9];
 
         model.addRow(new Object[]{
             orderId,
@@ -147,6 +148,7 @@ private void loadOrders() {
             medicine,
             quantity,
             total,
+            ward,
             status,
             date
         });
