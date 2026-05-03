@@ -285,6 +285,7 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
                 DataStore.orders[DataStore.orderCount][6] = java.time.LocalDate.now().toString();
                 DataStore.orders[DataStore.orderCount][7] = total;
                 DataStore.orders[DataStore.orderCount][8] = DataStore.currentUserId;
+                DataStore.orders[DataStore.orderCount][9] = ward;
                 
                 DataStore.orderCount++;
                 DataStore.orderIdCounter++;

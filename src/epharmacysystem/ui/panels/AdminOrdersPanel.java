@@ -17,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Zid
  */
-public class PharmacistsOrdersPanel extends javax.swing.JPanel {
+public class AdminOrdersPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form DoctorsOrderPanel
      */
-    public PharmacistsOrdersPanel() {
+    public AdminOrdersPanel() {
         initComponents();
         loadOrders();
           
@@ -38,11 +38,12 @@ public class PharmacistsOrdersPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        pharmacistsOrderTbl = new javax.swing.JTable();
+        adminOrderTbl = new javax.swing.JTable();
         btnUpdateStatusOrder = new javax.swing.JButton();
         btnViewOrder = new javax.swing.JButton();
+        deleteOrderBtn = new javax.swing.JButton();
 
-        pharmacistsOrderTbl.setModel(new javax.swing.table.DefaultTableModel(
+        adminOrderTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -53,13 +54,16 @@ public class PharmacistsOrdersPanel extends javax.swing.JPanel {
                 "Order ID", "Patient", "Medicine", "Quantity", "Total Price", "Ward", "Status", "Date"
             }
         ));
-        jScrollPane1.setViewportView(pharmacistsOrderTbl);
+        jScrollPane1.setViewportView(adminOrderTbl);
 
         btnUpdateStatusOrder.setText("Update Order Status");
         btnUpdateStatusOrder.addActionListener(this::btnUpdateStatusOrderActionPerformed);
 
         btnViewOrder.setText("View Order");
         btnViewOrder.addActionListener(this::btnViewOrderActionPerformed);
+
+        deleteOrderBtn.setText("Delete Order");
+        deleteOrderBtn.addActionListener(this::deleteOrderBtnActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -70,6 +74,8 @@ public class PharmacistsOrdersPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnUpdateStatusOrder)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteOrderBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnViewOrder)))
                 .addContainerGap())
@@ -81,34 +87,35 @@ public class PharmacistsOrdersPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdateStatusOrder)
-                    .addComponent(btnViewOrder))
+                    .addComponent(btnViewOrder)
+                    .addComponent(deleteOrderBtn))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     public void filterTable(String text) {
 
     javax.swing.table.DefaultTableModel model =
-        (javax.swing.table.DefaultTableModel) pharmacistsOrderTbl.getModel();
+        (javax.swing.table.DefaultTableModel) adminOrderTbl.getModel();
 
     javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> sorter =
         new javax.swing.table.TableRowSorter<>(model);
 
-    pharmacistsOrderTbl.setRowSorter(sorter);
+    adminOrderTbl.setRowSorter(sorter);
 
     sorter.setRowFilter(
     javax.swing.RowFilter.regexFilter("(?i)^" + java.util.regex.Pattern.quote(text))
 );
 }
     private void btnUpdateStatusOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStatusOrderActionPerformed
-       int row = pharmacistsOrderTbl.getSelectedRow();
+       int row = adminOrderTbl.getSelectedRow();
         
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Please select an order to update!");
             return;
         }
         
-        int modelRow = pharmacistsOrderTbl.convertRowIndexToModel(row);
-        String orderId = pharmacistsOrderTbl.getModel().getValueAt(modelRow, 0).toString();
+        int modelRow = adminOrderTbl.convertRowIndexToModel(row);
+        String orderId = adminOrderTbl.getModel().getValueAt(modelRow, 0).toString();
 
         // Fixed constructor call: Removed undefined 'ds' and passed 'orderId'
         EditOrderStatusDialog dialog = new EditOrderStatusDialog(
@@ -125,13 +132,13 @@ public class PharmacistsOrdersPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateStatusOrderActionPerformed
 
     private void btnViewOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewOrderActionPerformed
-        int row = pharmacistsOrderTbl.getSelectedRow();
+        int row = adminOrderTbl.getSelectedRow();
         
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Select a prescription first!");
             return;
         }
-        DefaultTableModel model = (DefaultTableModel) pharmacistsOrderTbl.getModel();
+        DefaultTableModel model = (DefaultTableModel) adminOrderTbl.getModel();
         
         String orderId = model.getValueAt(row, 0).toString();
         
@@ -144,10 +151,72 @@ public class PharmacistsOrdersPanel extends javax.swing.JPanel {
         dialog.setVisible(true);    
     }//GEN-LAST:event_btnViewOrderActionPerformed
 
+    private void deleteOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteOrderBtnActionPerformed
+     int row = adminOrderTbl.getSelectedRow();
+    
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this, "Please select an order to delete!");
+        return;
+    }
+
+    // 1. Get the Order ID from the table (handling potential sorting/filtering)
+    int modelRow = adminOrderTbl.convertRowIndexToModel(row);
+    String orderId = adminOrderTbl.getModel().getValueAt(modelRow, 0).toString();
+
+    // 2. Confirm Deletion
+    int confirm = JOptionPane.showConfirmDialog(this, 
+        "Are you sure you want to delete Order " + orderId + "?\nThis will permanently remove the record.", 
+        "Confirm Deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        int orderIndex = -1;
+
+        // 3. Find the order index in DataStore
+        for (int i = 0; i < DataStore.orderCount; i++) {
+            if (DataStore.orders[i][0].equals(orderId)) {
+                orderIndex = i;
+                break;
+            }
+        }
+
+        if (orderIndex != -1) {
+            String status = DataStore.orders[orderIndex][5];
+            String medicineName = DataStore.orders[orderIndex][3];
+            int qtyToRestore = Integer.parseInt(DataStore.orders[orderIndex][4]);
+
+            // 4. STOCK RESTORATION
+            // If the order was Approved or Delivered, we must put the stock back
+            if (status.equals(DataStore.ORDER_APPROVED) || status.equals(DataStore.ORDER_DELIVERED)) {
+                for (int m = 0; m < DataStore.medicineCount; m++) {
+                    if (DataStore.medicines[m][1].equals(medicineName)) {
+                        int currentStock = Integer.parseInt(DataStore.medicines[m][2]);
+                        DataStore.medicines[m][2] = String.valueOf(currentStock + qtyToRestore);
+                        break;
+                    }
+                }
+            }
+
+            // 5. REMOVE FROM ARRAY (Shift elements to the left)
+            for (int j = orderIndex; j < DataStore.orderCount - 1; j++) {
+                DataStore.orders[j] = DataStore.orders[j + 1];
+            }
+            
+            // Clean up the last index and decrement count
+            DataStore.orders[DataStore.orderCount - 1] = null;
+            DataStore.orderCount--;
+
+            JOptionPane.showMessageDialog(this, "Order deleted successfully. Stock has been adjusted.");
+            
+            // 6. Refresh UI
+            loadOrders(); 
+        }
+    }
+    }//GEN-LAST:event_deleteOrderBtnActionPerformed
+
 private void loadOrders() {
 
     javax.swing.table.DefaultTableModel model =
-    (javax.swing.table.DefaultTableModel) pharmacistsOrderTbl.getModel();
+    (javax.swing.table.DefaultTableModel) adminOrderTbl.getModel();
     model.setRowCount(0); 
  
    
@@ -178,9 +247,10 @@ private void loadOrders() {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable adminOrderTbl;
     private javax.swing.JButton btnUpdateStatusOrder;
     private javax.swing.JButton btnViewOrder;
+    private javax.swing.JButton deleteOrderBtn;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable pharmacistsOrderTbl;
     // End of variables declaration//GEN-END:variables
 }

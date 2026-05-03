@@ -6,6 +6,7 @@ package epharmacysystem.ui.dashboard;
 
 import epharmacysystem.ui.auth.LoginFrame;
 import epharmacysystem.data.DataStore;
+import epharmacysystem.ui.panels.AdminOrdersPanel;
 import epharmacysystem.ui.panels.AdminUsersPanel;
 import epharmacysystem.ui.panels.DoctorsOrdersPanel;
 import epharmacysystem.ui.panels.DoctorsPrescriptionsPanel;
@@ -28,6 +29,7 @@ public class AdminFrame extends javax.swing.JFrame {
     private DoctorsOrdersPanel doctorsOrderPanel;
     private PharmacistsMedicinesPanel pharmacistsMedicinesPanel;
     private AdminUsersPanel adminUsersPanel;
+    private AdminOrdersPanel adminOrdersPanel;
     private javax.swing.JPanel activePanel;
     
     public AdminFrame() {
@@ -217,14 +219,14 @@ public class AdminFrame extends javax.swing.JFrame {
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
     String text = searchField.getText();
 
-    if (activePanel instanceof DoctorsPatientsPanel) {
-        ((DoctorsPatientsPanel) activePanel).filterTable(text);
+    if (activePanel instanceof AdminUsersPanel) {
+        ((AdminUsersPanel) activePanel).filterTable(text);
     } 
-    else if(activePanel instanceof DoctorsPrescriptionsPanel) {
-        ((DoctorsPrescriptionsPanel) activePanel).filterTable(text);
+     else if(activePanel instanceof  PharmacistsMedicinesPanel ) {
+        ((PharmacistsMedicinesPanel) activePanel).filterTable(text);
     } 
-    else if(activePanel instanceof DoctorsOrdersPanel) {
-        ((DoctorsOrdersPanel) activePanel).filterTable(text);
+    else if(activePanel instanceof  AdminOrdersPanel) {
+        ((AdminOrdersPanel) activePanel).filterTable(text);
     } 
     }//GEN-LAST:event_searchBtnActionPerformed
 
@@ -233,16 +235,16 @@ public class AdminFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_searchBtn1ActionPerformed
 
     private void ordersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordersBtnActionPerformed
-        doctorsOrderPanel = new DoctorsOrdersPanel();
+        adminOrdersPanel = new AdminOrdersPanel();
 
         contentPanel.removeAll();
         contentPanel.setLayout(new java.awt.BorderLayout());
-        contentPanel.add(doctorsOrderPanel, java.awt.BorderLayout.CENTER);
+        contentPanel.add( adminOrdersPanel, java.awt.BorderLayout.CENTER);
 
         contentPanel.revalidate();
         contentPanel.repaint();
 
-        activePanel = doctorsOrderPanel;
+        activePanel =  adminOrdersPanel;
         searchField.setVisible(true);
         searchField.setText("Search for prescriptions...");
         searchBtn.setVisible(true);
