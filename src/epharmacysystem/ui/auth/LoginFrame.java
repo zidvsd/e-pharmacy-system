@@ -8,6 +8,7 @@ import epharmacysystem.ui.dashboard.DoctorFrame;
 import epharmacysystem.ui.dashboard.PatientFrame;
 import epharmacysystem.ui.dashboard.PharmacistFrame;
 import epharmacysystem.data.DataStore;
+import epharmacysystem.ui.dashboard.AdminFrame;
 
 /**
  *
@@ -166,15 +167,18 @@ public class LoginFrame extends javax.swing.JFrame {
                  DataStore.currentUserId = id;
                 javax.swing.JOptionPane.showMessageDialog(this, "Welcome " + name + " ("+ role + ")");
                 switch (role) {
-                    case "doctor":
+                    case DataStore.ROLE_DOCTOR:
                         new DoctorFrame().setVisible(true);
                         break;
-                    case "patient":
+                    case DataStore.ROLE_PATIENT:
                         new PatientFrame().setVisible(true);
                         break;
-                    case "pharmacist":
+                    case DataStore.ROLE_PHARMACIST:
                         new PharmacistFrame().setVisible(true);
                         break;
+                    case DataStore.ROLE_ADMIN:
+                        new AdminFrame().setVisible(true);
+                        break;    
                     default:
                         break;
                 }

@@ -7,16 +7,13 @@ public class DataStore {
     public static String currentUserId;
     public static String currentRole;
 
-    // ================= USERS =================
-    public static String[][] users = {
-        {"u001", "drjuan", "pass123", "doctor", "Dr. Juan Santos"},
-        {"u002", "drmarla", "pass123", "doctor", "Dr. Marla Reyes"},
-        {"u003", "patient1", "pass123", "patient", "Juan Dela Cruz"},
-        {"u004", "patient2", "pass123", "patient", "Maria Santos"},
-        {"u005", "pharmacist1", "pass123", "pharmacist", "Pharmacist John"}
-    };
+    
+    
  
     // ================= DATA TABLES =================
+    public static String[][] users = new String[100][5]; 
+    public static int userCount = 0;
+    
     public static String[][] patients = new String[50][10];
     public static int patientCount = 0;
 
@@ -29,6 +26,7 @@ public class DataStore {
     public static String[][] orders = new String[100][9];
     public static int orderCount = 0;
     // ================= ID COUNTERS =================
+    public static int userIdCounter = 1;
     public static int patientIdCounter = 1;
     public static int prescriptionIdCounter = 1;
     public static int medicineIdCounter = 1;
@@ -44,6 +42,12 @@ public class DataStore {
     public static final String ORDER_DELIVERED = "Delivered";
     public static final String ORDER_REJECTED = "Rejected";
     
+    // Role Constants
+    public static final String ROLE_ADMIN = "admin";
+    public static final String ROLE_DOCTOR = "doctor";
+    public static final String ROLE_PATIENT = "patient";
+    public static final String ROLE_PHARMACIST = "pharmacist";
+    
     public static DataStore instance;
 
     // ================= INITIAL DATA BLOCK =================
@@ -53,6 +57,18 @@ public class DataStore {
 
     private static void initializeSampleData() {
 
+        users[0] = new String[]{"u001", "drjuan", "pass123", ROLE_DOCTOR, "Dr. Juan Santos"};
+        users[1] = new String[]{"u002", "drmarla", "pass123", ROLE_DOCTOR, "Dr. Marla Reyes"};
+        users[2] = new String[]{"u003", "patient1", "pass123", ROLE_PATIENT, "Juan Dela Cruz"};
+        users[3] = new String[]{"u004", "patient2", "pass123", ROLE_PATIENT, "Maria Santos"};
+        users[4] = new String[]{"u005", "pharmacist1", "pass123", ROLE_PHARMACIST, "Pharmacist John"};
+        // Added Admin Role
+        users[5] = new String[]{"u006", "admin", "admin123", ROLE_ADMIN, "System Administrator"};
+        
+        userCount = 6;
+        userIdCounter = 7;
+
+        // Patients
         patients[0] = new String[]{"P001", "Juan Dela Cruz", "45", "Male", "Ward A", "Diabetes", "u003", "u001"};
         patients[1] = new String[]{"P002", "Maria Santos", "32", "Female", "Ward B", "Hypertension", "u004", "u002"};
         patientCount = 2;

@@ -18,13 +18,13 @@ public class MyProfilePanel extends javax.swing.JPanel {
     public MyProfilePanel() {
         initComponents();
         loadPatientData();
-        System.out.println("CurrentUserId: " + DataStore.currentUserId);
+       
     }
     private void loadPatientData() {
 
     for (int i = 0; i < DataStore.patientCount; i++) {
-System.out.println("SETTING NAME: " + DataStore.patients[i][1]);
-System.out.println("BEFORE LABEL: " + txtPatientName.getText());
+        System.out.println("SETTING NAME: " + DataStore.patients[i][1]);
+        System.out.println("BEFORE LABEL: " + txtPatientName.getText());
         if (DataStore.patients[i] != null &&
             DataStore.patients[i][6] != null &&
             DataStore.patients[i][6].equals(DataStore.currentUserId)) {

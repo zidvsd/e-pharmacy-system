@@ -5,23 +5,24 @@
 package epharmacysystem.ui.panels;
 
 import epharmacysystem.data.DataStore;
-import epharmacysystem.ui.dialogs.AddPatientDialog;
+import epharmacysystem.ui.dialogs.AddUserDialog;
 import epharmacysystem.ui.dialogs.EditPatientDialog;
+import epharmacysystem.ui.dialogs.EditUserDialog;
 
 
 /**
  *
  * @author Zid
  */
-public class DoctorsPatientsPanel extends javax.swing.JPanel {
+public class AdminUsersPanel extends javax.swing.JPanel {
 
     
     /**
      * Creates new form PatientsPanel
      */
-    public DoctorsPatientsPanel() {
+    public AdminUsersPanel() {
         initComponents();
-        loadPatients();
+        loadUsers();
         
     }
 
@@ -35,37 +36,41 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        patientsTable = new javax.swing.JTable();
+        usersTable = new javax.swing.JTable();
         addPatientBtn = new javax.swing.JButton();
         editPatientBtn = new javax.swing.JButton();
         deletePatientBtn = new javax.swing.JButton();
+        changePasswordBtn = new javax.swing.JButton();
 
-        patientsTable.setModel(new javax.swing.table.DefaultTableModel(
+        usersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Age", "Gender", "Ward", "History"
+                "User ID", "Username", "Role", "Full Name"
             }
         ));
-        patientsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        usersTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                patientsTableMouseClicked(evt);
+                usersTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(patientsTable);
+        jScrollPane1.setViewportView(usersTable);
 
-        addPatientBtn.setText("Add Patient");
+        addPatientBtn.setText("Add User");
         addPatientBtn.addActionListener(this::addPatientBtnActionPerformed);
 
-        editPatientBtn.setText("Edit Patient");
+        editPatientBtn.setText("Edit User");
         editPatientBtn.addActionListener(this::editPatientBtnActionPerformed);
 
-        deletePatientBtn.setText("Delete Patient");
+        deletePatientBtn.setText("Delete User");
         deletePatientBtn.addActionListener(this::deletePatientBtnActionPerformed);
+
+        changePasswordBtn.setText("Change User Password");
+        changePasswordBtn.addActionListener(this::changePasswordBtnActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -78,7 +83,8 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
                 .addComponent(editPatientBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deletePatientBtn)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(changePasswordBtn))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -89,118 +95,107 @@ public class DoctorsPatientsPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addPatientBtn)
                     .addComponent(editPatientBtn)
-                    .addComponent(deletePatientBtn))
+                    .addComponent(deletePatientBtn)
+                    .addComponent(changePasswordBtn))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void addPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientBtnActionPerformed
-        AddPatientDialog dialog = new AddPatientDialog(
+        AddUserDialog dialog = new AddUserDialog(
         (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
         true, DataStore.instance
     );
     
         dialog.setLocationRelativeTo(this); 
     dialog.setVisible(true);
-    loadPatients(); // refresh table
+    loadUsers(); // refresh table
     }//GEN-LAST:event_addPatientBtnActionPerformed
 
-    private void patientsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_patientsTableMouseClicked
+    private void usersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersTableMouseClicked
        
       
-    }//GEN-LAST:event_patientsTableMouseClicked
+    }//GEN-LAST:event_usersTableMouseClicked
 
     private void editPatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPatientBtnActionPerformed
         
-    int selectedRow = patientsTable.getSelectedRow();
+    int selectedRow = usersTable.getSelectedRow();
 
     if (selectedRow == -1) {
         javax.swing.JOptionPane.showMessageDialog(this, "Select a patient first!");
         return;
     }
 
-    int modelRow = patientsTable.convertRowIndexToModel(selectedRow);
+    int modelRow = usersTable.convertRowIndexToModel(selectedRow);
     
-    String patientId = patientsTable.getModel().getValueAt(modelRow, 0).toString();
+    String userId = usersTable.getModel().getValueAt(modelRow, 0).toString();
     
-    EditPatientDialog dialog = new EditPatientDialog(
+    EditUserDialog dialog = new EditUserDialog(
         (java.awt.Frame) javax.swing.SwingUtilities.getWindowAncestor(this),
         true,
         DataStore.instance,
-        patientId
+        userId
     );
 
     dialog.setLocationRelativeTo(this); 
     dialog.setVisible(true);
-    loadPatients();
+    loadUsers();
 
     }//GEN-LAST:event_editPatientBtnActionPerformed
 
     private void deletePatientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePatientBtnActionPerformed
-        int row = patientsTable.getSelectedRow();
 
-        // 1. Check if a row is actually selected
+        int row = usersTable.getSelectedRow();
+
         if (row == -1) {
             javax.swing.JOptionPane.showMessageDialog(this, "Select a patient first!");
             return;
         }
 
-        // 2. The Confirmation Panel (Don't remove this!)
+        int modelRow = usersTable.convertRowIndexToModel(row);
+
         int confirm = javax.swing.JOptionPane.showConfirmDialog(
             this,
-            "Are you sure you want to delete this patient record? \n(This will hide the patient but keep medical history intact.)",
+            "Are you sure you want to delete this patient?",
             "Confirm Delete",
-            javax.swing.JOptionPane.YES_NO_OPTION,
-            javax.swing.JOptionPane.WARNING_MESSAGE
+            javax.swing.JOptionPane.YES_NO_OPTION
         );
 
         if (confirm != javax.swing.JOptionPane.YES_OPTION) return;
 
-        // 3. Get the ID from the table (assuming ID is in column 0)
-        String patientId = patientsTable.getValueAt(row, 0).toString();
+        // shift array left
+        for (int i = modelRow; i < DataStore.patientCount - 1; i++) {
+            DataStore.patients[i] = DataStore.patients[i + 1];
+        }
 
-        // 4. Soft Delete Logic: Find the patient in DataStore and update
-        for (int i = 0; i < DataStore.patientCount; i++) {
-            if (DataStore.patients[i][0].equals(patientId)) {
+        DataStore.patientCount--;
 
-                // Mark the Doctor ID as "DELETED" so your loadPatients() filter hides it
-                DataStore.patients[i][7] = "DELETED"; 
+        loadUsers();
 
-                // Update the name with a fallback string for audit/history purposes
-                DataStore.patients[i][1] = "[DELETED] " + DataStore.patients[i][1];
-
-                break; 
-            }
-    }
-
-    // 5. Refresh the UI
-    loadPatients();
-    javax.swing.JOptionPane.showMessageDialog(this, "Patient record marked as deleted.");
     }//GEN-LAST:event_deletePatientBtnActionPerformed
 
-private void loadPatients() {
+    private void changePasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_changePasswordBtnActionPerformed
+
+private void loadUsers() {
     
     javax.swing.table.DefaultTableModel model =
-    (javax.swing.table.DefaultTableModel) patientsTable.getModel();
+        (javax.swing.table.DefaultTableModel) usersTable.getModel();
 
     model.setRowCount(0); 
     
-    String currentDoctorId = DataStore.currentUserId;
 
-    for (int i = 0; i < DataStore.patientCount; i++) {
-        if (DataStore.patients[i][7] == null ||
-            !DataStore.patients[i][7].equals(currentDoctorId)) {
-            continue;
-        }
+
+    for (int i = 0; i < DataStore.userCount; i++) {
+        
 
 
         model.addRow(new Object[]{
-            DataStore.patients[i][0], // ID
-            DataStore.patients[i][1], // Name
-            DataStore.patients[i][2], // Age
-            DataStore.patients[i][3], // Gender
-            DataStore.patients[i][4], // Ward
-            DataStore.patients[i][5]  // History
+            DataStore.users[i][0], // ID
+            DataStore.users[i][1], // username
+            DataStore.users[i][3], // Role
+            DataStore.users[i][4], // Fullname
         });
     }
 }
@@ -208,12 +203,12 @@ private void loadPatients() {
 public void filterTable(String text) {
 
     javax.swing.table.DefaultTableModel model =
-        (javax.swing.table.DefaultTableModel) patientsTable.getModel();
+        (javax.swing.table.DefaultTableModel) usersTable.getModel();
 
     javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> sorter =
         new javax.swing.table.TableRowSorter<>(model);
 
-    patientsTable.setRowSorter(sorter);
+    usersTable.setRowSorter(sorter);
 
     sorter.setRowFilter(
     javax.swing.RowFilter.regexFilter("(?i)^" + java.util.regex.Pattern.quote(text))
@@ -225,10 +220,11 @@ public void filterTable(String text) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPatientBtn;
+    private javax.swing.JButton changePasswordBtn;
     private javax.swing.JButton deletePatientBtn;
     private javax.swing.JButton editPatientBtn;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable patientsTable;
+    private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
 }
 

@@ -240,7 +240,7 @@ private void loadOrderDetails() {
    for (int i = 0; i < DataStore.orderCount; i++) {
         if (DataStore.orders[i][0].equals(orderId)) {
             String patientId = DataStore.orders[i][1];
-            String patientName = "Unknown Patient";
+            String patientName = "Deleted Patient";
 
             // Lookup Patient Name using the Patient ID
             for (int j = 0; j < DataStore.patientCount; j++) {

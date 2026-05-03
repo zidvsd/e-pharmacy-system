@@ -30,7 +30,6 @@ public class EditOrderStatusDialog extends javax.swing.JDialog {
     
     private void loadOrder(){
         cmbOrderStatus.setModel(new DefaultComboBoxModel<>(new String[]{
-            DataStore.ORDER_PENDING,
             DataStore.ORDER_APPROVED,
             DataStore.ORDER_DELIVERED,
             DataStore.ORDER_REJECTED

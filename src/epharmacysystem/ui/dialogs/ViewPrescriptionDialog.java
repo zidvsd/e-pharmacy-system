@@ -47,7 +47,7 @@ public class ViewPrescriptionDialog extends javax.swing.JDialog {
     String doctorId = DataStore.prescriptions[index][2];
 
     // patient name
-    String patientName = "Unknown Patient";
+    String patientName = "Deleted Patient";
     for (int i = 0; i < DataStore.patientCount; i++) {
         if (DataStore.patients[i][0].equals(patientId)) {
             patientName = DataStore.patients[i][1];
