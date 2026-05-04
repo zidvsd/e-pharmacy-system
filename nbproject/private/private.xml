@@ -35,6 +35,8 @@
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/ChangePasswordDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/DoctorCreateOrderDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/AdminOrdersPanel.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/AdminPrescriptionsPanel.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/AdminEditPrescriptionDialog.java</file>
         </group>
     </open-files>
 </project-private>
