@@ -4,14 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/data/DataStore.java</file>
-            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/main/EPharmacySystem.java</file>
-            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/DoctorsPatientsPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dashboard/PatientFrame.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/DoctorsPatientsPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/MyProfilePanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/OrdersPanel.java</file>
-            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/MedicinesPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/MyPrescriptionsPanel.java</file>
-            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/DoctorCreateOrderDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/AddPrescriptionDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/EditPatientDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/AddPatientDialog.java</file>
@@ -30,6 +27,14 @@
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/PharmacistsOrdersPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/EditOrderStatusDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/EditPrescriptionDialog.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dashboard/search-interface-symbol.png</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dashboard/AdminFrame.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/AdminUsersPanel.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/AddUserDialog.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/EditUserDialog.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/ChangePasswordDialog.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/DoctorCreateOrderDialog.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/AdminOrdersPanel.java</file>
         </group>
     </open-files>
 </project-private>

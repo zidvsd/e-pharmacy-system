@@ -11,18 +11,18 @@ import javax.swing.JOptionPane;
  *
  * @author Zid
  */
-public class EditPrescriptionDialog extends javax.swing.JDialog {
+public class AdminEditPrescriptionDialog extends javax.swing.JDialog {
     private DataStore ds;  
     private String prescriptionId;
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditPrescriptionDialog.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminEditPrescriptionDialog.class.getName());
      
     
 
     /**
      * Creates new form EditPrescriptionDialog
      */
-    public EditPrescriptionDialog(java.awt.Frame parent, boolean modal, DataStore ds, String prescriptionId) {
+    public AdminEditPrescriptionDialog(java.awt.Frame parent, boolean modal, DataStore ds, String prescriptionId) {
         super(parent, modal);
         this.ds = ds;
         this.prescriptionId = prescriptionId;
@@ -31,7 +31,7 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
     }
 
     private void loadData(){
-         int rowIndex = -1;
+       int rowIndex = -1;
 
     for (int i = 0; i < DataStore.prescriptionCount; i++) {
         if (DataStore.prescriptions[i][0].equals(prescriptionId)) {
@@ -46,60 +46,39 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
         return;
     }
 
-    String currentDoctorId = DataStore.currentUserId;
-
-    // ===== 2. LOAD PATIENTS (ONLY DOCTOR'S PATIENTS) =====
-    cmbPatient.removeAllItems();
-
-    for (int i = 0; i < DataStore.patientCount; i++) {
-
-        if (DataStore.patients[i][7] == null ||
-            !DataStore.patients[i][7].equals(currentDoctorId)) {
-            continue;
-        }
-
-        String patientId = DataStore.patients[i][0];
-        String patientName = DataStore.patients[i][1];
-
-        cmbPatient.addItem(patientId + " - " + patientName);
-    }
-
-    // ===== 3. LOAD MEDICINES =====
-    cmbMedicine.removeAllItems();
-
-    for (int i = 0; i < DataStore.medicineCount; i++) {
-        cmbMedicine.addItem(DataStore.medicines[i][1]);
-    }
-
-    // ===== 4. LOAD STATUS =====
-    cmbRxStatus.removeAllItems();
-    cmbRxStatus.addItem(DataStore.RX_PENDING);
-    cmbRxStatus.addItem(DataStore.RX_ACTIVE);
-    cmbRxStatus.addItem(DataStore.RX_FULFILLED);
-
-    // ===== 5. GET CURRENT PRESCRIPTION DATA =====
+    // ===== 1. GET DATA FROM ARRAY =====
     String patientId = ds.prescriptions[rowIndex][1];
+    String doctorId = ds.prescriptions[rowIndex][2];
     String medicine = ds.prescriptions[rowIndex][3];
+    String dosage = ds.prescriptions[rowIndex][4];
+    String quantity = ds.prescriptions[rowIndex][5];
+    String status = ds.prescriptions[rowIndex][7];
+    String instructions = ds.prescriptions[rowIndex][8];
 
-    // ===== 6. SELECT PATIENT =====
-    for (int i = 0; i < cmbPatient.getItemCount(); i++) {
-        if (cmbPatient.getItemAt(i).startsWith(patientId + " -")) {
-            cmbPatient.setSelectedIndex(i);
+    // ===== 2. LOOK UP PATIENT NAME FOR DISPLAY =====
+    String patientName = "Unknown Patient";
+    for (int i = 0; i < DataStore.patientCount; i++) {
+        if (DataStore.patients[i][0].equals(patientId)) {
+            patientName = DataStore.patients[i][1];
             break;
         }
     }
 
-    // ===== 7. SELECT MEDICINE =====
-    cmbMedicine.setSelectedItem(medicine);
+    // ===== 3. FILL THE LABELS (UNEDITABLE) =====
+    lblPatient.setText(patientId + " - " + patientName);
+    lblMedicine.setText(medicine);
+    lblDosage.setText(dosage);
+    lblQuantity.setText(quantity);
+    lblInstructions.setText(instructions);
 
-    // ===== 8. FILL FIELDS =====
-    txtDosage.setText(ds.prescriptions[rowIndex][4]);
-    txtQuantity.setText(ds.prescriptions[rowIndex][5]);
-    txtInstructions.setText(ds.prescriptions[rowIndex][8]);
-    cmbRxStatus.setSelectedItem(ds.prescriptions[rowIndex][7]);
+    // ===== 4. LOAD STATUS COMBO BOX (EDITABLE) =====
+    cmbRxStatus.removeAllItems();
+    cmbRxStatus.addItem(DataStore.RX_PENDING);
+    cmbRxStatus.addItem(DataStore.RX_ACTIVE);
+    cmbRxStatus.addItem(DataStore.RX_FULFILLED);
+    cmbRxStatus.addItem(DataStore.RX_CANCELLED);
     
-    String currentStatus = ds.prescriptions[rowIndex][7];
-    cmbRxStatus.setSelectedItem(currentStatus);
+    cmbRxStatus.setSelectedItem(status);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -116,15 +95,15 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        cmbPatient = new javax.swing.JComboBox<>();
-        txtDosage = new javax.swing.JTextField();
-        cmbMedicine = new javax.swing.JComboBox<>();
-        txtQuantity = new javax.swing.JTextField();
-        txtInstructions = new javax.swing.JTextField();
         btnSavePrescription = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         cmbRxStatus = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+        lblPatient = new javax.swing.JLabel();
+        lblDosage = new javax.swing.JLabel();
+        lblQuantity = new javax.swing.JLabel();
+        lblInstructions = new javax.swing.JLabel();
+        lblMedicine = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -139,14 +118,6 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
 
         jLabel5.setText("Instructions:");
 
-        cmbPatient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbPatient.addActionListener(this::cmbPatientActionPerformed);
-
-        txtDosage.addActionListener(this::txtDosageActionPerformed);
-
-        cmbMedicine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbMedicine.addActionListener(this::cmbMedicineActionPerformed);
-
         btnSavePrescription.setText("Save");
         btnSavePrescription.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -157,9 +128,19 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(this::btnCancelActionPerformed);
 
-        cmbRxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbRxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pending", "Active", "Fulfilled", "Cancelled" }));
 
         jLabel7.setText("Status:");
+
+        lblPatient.setText("N/A");
+
+        lblDosage.setText("N/A");
+
+        lblQuantity.setText("0");
+
+        lblInstructions.setText("N/A");
+
+        lblMedicine.setText("N/A");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -169,39 +150,38 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmbPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(69, 69, 69)
+                        .addComponent(lblQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(btnSavePrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtInstructions)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(lblInstructions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(58, 58, 58)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbMedicine, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDosage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblDosage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblMedicine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmbRxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbRxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(lblPatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cmbPatient, txtDosage});
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtInstructions, txtQuantity});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel4, jLabel5});
 
@@ -211,24 +191,24 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cmbPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblPatient))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtDosage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDosage))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cmbMedicine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblMedicine))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblQuantity))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtInstructions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblInstructions))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbRxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -270,10 +250,6 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbMedicineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMedicineActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbMedicineActionPerformed
-
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
   
         this.dispose();
@@ -281,7 +257,7 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
 
     private void btnSavePrescriptionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSavePrescriptionMouseClicked
 
-          int rowIndex = -1;
+        int rowIndex = -1;
 
     for (int i = 0; i < DataStore.prescriptionCount; i++) {
         if (DataStore.prescriptions[i][0].equals(prescriptionId)) {
@@ -295,29 +271,13 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
         return;
     }
 
-    // ===== FIX PATIENT ID (IMPORTANT BUG FIX) =====
-        String selectedPatient = cmbPatient.getSelectedItem().toString();
-        String patientId = selectedPatient.split(" - ")[0];
+    // ===== SAVE ONLY THE STATUS =====
+    String newStatus = cmbRxStatus.getSelectedItem().toString();
+    ds.prescriptions[rowIndex][7] = newStatus;
 
-        // ===== SAVE =====
-        ds.prescriptions[rowIndex][1] = patientId;
-        ds.prescriptions[rowIndex][3] = cmbMedicine.getSelectedItem().toString();
-        ds.prescriptions[rowIndex][4] = txtDosage.getText();
-        ds.prescriptions[rowIndex][5] = txtQuantity.getText();
-        ds.prescriptions[rowIndex][7] = cmbRxStatus.getSelectedItem().toString();
-        ds.prescriptions[rowIndex][8] = txtInstructions.getText();
-
-        javax.swing.JOptionPane.showMessageDialog(this, "Prescription updated!");
-        dispose();
+    javax.swing.JOptionPane.showMessageDialog(this, "Status updated to: " + newStatus);
+    dispose();
     }//GEN-LAST:event_btnSavePrescriptionMouseClicked
-
-    private void txtDosageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDosageActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDosageActionPerformed
-
-    private void cmbPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPatientActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbPatientActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,8 +287,6 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSavePrescription;
-    private javax.swing.JComboBox<String> cmbMedicine;
-    private javax.swing.JComboBox<String> cmbPatient;
     private javax.swing.JComboBox<String> cmbRxStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -338,9 +296,11 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtDosage;
-    private javax.swing.JTextField txtInstructions;
-    private javax.swing.JTextField txtQuantity;
+    private javax.swing.JLabel lblDosage;
+    private javax.swing.JLabel lblInstructions;
+    private javax.swing.JLabel lblMedicine;
+    private javax.swing.JLabel lblPatient;
+    private javax.swing.JLabel lblQuantity;
     // End of variables declaration//GEN-END:variables
 
 }

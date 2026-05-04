@@ -7,6 +7,7 @@ package epharmacysystem.ui.dashboard;
 import epharmacysystem.ui.auth.LoginFrame;
 import epharmacysystem.data.DataStore;
 import epharmacysystem.ui.panels.AdminOrdersPanel;
+import epharmacysystem.ui.panels.AdminPrescriptionsPanel;
 import epharmacysystem.ui.panels.AdminUsersPanel;
 import epharmacysystem.ui.panels.DoctorsOrdersPanel;
 import epharmacysystem.ui.panels.DoctorsPrescriptionsPanel;
@@ -30,6 +31,7 @@ public class AdminFrame extends javax.swing.JFrame {
     private PharmacistsMedicinesPanel pharmacistsMedicinesPanel;
     private AdminUsersPanel adminUsersPanel;
     private AdminOrdersPanel adminOrdersPanel;
+      private AdminPrescriptionsPanel adminPrescriptionsPanel;
     private javax.swing.JPanel activePanel;
     
     public AdminFrame() {
@@ -152,11 +154,12 @@ public class AdminFrame extends javax.swing.JFrame {
                     .addComponent(btnLogout)
                     .addComponent(username))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(prescriptionsBtn)
-                    .addComponent(ordersBtn)
-                    .addComponent(medicinesPanel)
-                    .addComponent(usersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(usersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(prescriptionsBtn)
+                        .addComponent(ordersBtn)
+                        .addComponent(medicinesPanel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,16 +199,17 @@ public class AdminFrame extends javax.swing.JFrame {
 
     private void prescriptionsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prescriptionsBtnActionPerformed
         // TODO add your handling code here:
-    prescriptionsPanel = new DoctorsPrescriptionsPanel();
+    adminPrescriptionsPanel = new AdminPrescriptionsPanel();
 
     contentPanel.removeAll();
     contentPanel.setLayout(new java.awt.BorderLayout());
-    contentPanel.add(prescriptionsPanel);
+    contentPanel.add(adminPrescriptionsPanel);
 
     contentPanel.revalidate();
     contentPanel.repaint();
 
-    activePanel = prescriptionsPanel;
+    activePanel = adminPrescriptionsPanel;
+;
      searchField.setVisible(true);
     searchField.setText("Search for prescriptions...");
     searchBtn.setVisible(true);
