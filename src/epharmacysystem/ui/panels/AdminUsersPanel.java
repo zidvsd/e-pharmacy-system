@@ -25,6 +25,7 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         initComponents();
         loadUsers();
         
+        
     }
 
     /**
@@ -78,7 +79,6 @@ public class AdminUsersPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(addPatientBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(editPatientBtn)
@@ -88,6 +88,9 @@ public class AdminUsersPanel extends javax.swing.JPanel {
                 .addComponent(changePasswordBtn))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {addPatientBtn, deleteUserBtn, editPatientBtn});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()

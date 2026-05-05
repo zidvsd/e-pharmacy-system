@@ -85,8 +85,7 @@ public class DoctorsPrescriptionsPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(btnDeletePrescription)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnViewPrescription)
-                .addContainerGap())
+                .addComponent(btnViewPrescription))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

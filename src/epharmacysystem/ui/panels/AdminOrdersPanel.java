@@ -75,7 +75,7 @@ public class AdminOrdersPanel extends javax.swing.JPanel {
                         .addComponent(btnUpdateStatusOrder)
                         .addGap(18, 18, 18)
                         .addComponent(deleteOrderBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 425, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 488, Short.MAX_VALUE)
                         .addComponent(btnViewOrder))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
