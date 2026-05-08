@@ -75,16 +75,19 @@ public class AdminOrdersPanel extends javax.swing.JPanel {
                         .addComponent(btnUpdateStatusOrder)
                         .addGap(18, 18, 18)
                         .addComponent(deleteOrderBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 488, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 400, Short.MAX_VALUE)
                         .addComponent(btnViewOrder))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnUpdateStatusOrder, btnViewOrder, deleteOrderBtn});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdateStatusOrder)
                     .addComponent(btnViewOrder)
@@ -127,7 +130,6 @@ public class AdminOrdersPanel extends javax.swing.JPanel {
         
         dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
-        
         loadOrders(); 
     }//GEN-LAST:event_btnUpdateStatusOrderActionPerformed
 

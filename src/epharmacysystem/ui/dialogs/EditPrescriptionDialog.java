@@ -199,7 +199,7 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancel, cmbMedicine, cmbRxStatus, txtInstructions, txtQuantity});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancel, cmbMedicine, cmbPatient, cmbRxStatus, txtDosage, txtInstructions, txtQuantity});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel4, jLabel5});
 

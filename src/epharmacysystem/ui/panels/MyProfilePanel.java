@@ -23,8 +23,6 @@ public class MyProfilePanel extends javax.swing.JPanel {
     private void loadPatientData() {
 
     for (int i = 0; i < DataStore.patientCount; i++) {
-        System.out.println("SETTING NAME: " + DataStore.patients[i][1]);
-        System.out.println("BEFORE LABEL: " + txtPatientName.getText());
         if (DataStore.patients[i] != null &&
             DataStore.patients[i][6] != null &&
             DataStore.patients[i][6].equals(DataStore.currentUserId)) {
@@ -62,31 +60,41 @@ public class MyProfilePanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(new java.awt.BorderLayout());
 
+        jLabel3.setFont(new java.awt.Font("Inter 18pt", 0, 14)); // NOI18N
         jLabel3.setText("Gender:");
 
+        jLabel4.setFont(new java.awt.Font("Inter 18pt", 0, 14)); // NOI18N
         jLabel4.setText("Age:");
 
+        jLabel5.setFont(new java.awt.Font("Inter 18pt", 0, 14)); // NOI18N
         jLabel5.setText("Ward:");
 
+        jLabel6.setFont(new java.awt.Font("Inter 18pt", 0, 14)); // NOI18N
         jLabel6.setText("History:");
 
-        txtPatientName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtPatientName.setFont(new java.awt.Font("Inter 18pt", 2, 18)); // NOI18N
         txtPatientName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/epharmacysystem/resources/images/user.png"))); // NOI18N
         txtPatientName.setText("name");
-        txtPatientName.setIconTextGap(20);
+        txtPatientName.setIconTextGap(12);
 
+        txtPatientAge.setFont(new java.awt.Font("Inter 18pt", 0, 14)); // NOI18N
         txtPatientAge.setText("age");
 
+        txtPatientGender.setFont(new java.awt.Font("Inter 18pt", 0, 14)); // NOI18N
         txtPatientGender.setText("gender");
 
+        txtPatientWard.setFont(new java.awt.Font("Inter 18pt", 0, 14)); // NOI18N
         txtPatientWard.setText("ward");
 
+        txtPatientHistory.setFont(new java.awt.Font("Inter 18pt", 0, 14)); // NOI18N
         txtPatientHistory.setText("history");
 
+        jLabel1.setFont(new java.awt.Font("Inter 18pt", 0, 16)); // NOI18N
         jLabel1.setText("PERSONAL INFO");
 
+        jLabel2.setFont(new java.awt.Font("Inter 18pt", 0, 16)); // NOI18N
         jLabel2.setText("CLINICAL DETAILS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -94,10 +102,9 @@ public class MyProfilePanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPatientName)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -117,10 +124,11 @@ public class MyProfilePanel extends javax.swing.JPanel {
                                 .addComponent(txtPatientWard))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addGap(31, 31, 31)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtPatientHistory))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(txtPatientName))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5, jLabel6, txtPatientAge, txtPatientGender, txtPatientHistory, txtPatientWard});
@@ -130,9 +138,8 @@ public class MyProfilePanel extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(txtPatientName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
@@ -148,12 +155,12 @@ public class MyProfilePanel extends javax.swing.JPanel {
                     .addComponent(txtPatientGender)
                     .addComponent(jLabel6)
                     .addComponent(txtPatientHistory))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel3, jLabel4, jLabel5, jLabel6, txtPatientAge, txtPatientGender, txtPatientHistory, txtPatientWard});
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, 160));
+        add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 

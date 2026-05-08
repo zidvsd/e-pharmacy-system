@@ -37,8 +37,9 @@ public class AdminFrame extends javax.swing.JFrame {
     public AdminFrame() {
 
         initComponents();
-        pack();
         setLocationRelativeTo(null);
+        pack();
+        setMinimumSize(new java.awt.Dimension(900, 500));
         username.setText(DataStore.currentUserName);
         searchField.setVisible(false);
         searchBtn.setVisible(false);
@@ -60,13 +61,13 @@ public class AdminFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         searchBtn1 = new javax.swing.JButton();
+        contentPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         usersBtn = new javax.swing.JButton();
         prescriptionsBtn = new javax.swing.JButton();
         username = new javax.swing.JLabel();
         ordersBtn = new javax.swing.JButton();
-        contentPanel = new javax.swing.JPanel();
         searchField = new javax.swing.JTextField();
         searchBtn = new javax.swing.JButton();
         medicinesPanel = new javax.swing.JButton();
@@ -76,10 +77,13 @@ public class AdminFrame extends javax.swing.JFrame {
         searchBtn1.addActionListener(this::searchBtn1ActionPerformed);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(685, 413));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
         jLabel1.setText("Admin's Dashboard");
 
+        btnLogout.setForeground(new java.awt.Color(255, 51, 51));
         btnLogout.setText("Logout");
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
 
@@ -89,21 +93,11 @@ public class AdminFrame extends javax.swing.JFrame {
         prescriptionsBtn.setText("Prescriptions ");
         prescriptionsBtn.addActionListener(this::prescriptionsBtnActionPerformed);
 
+        username.setFont(new java.awt.Font("Inter 24pt SemiBold", 0, 12)); // NOI18N
         username.setText("Admin (name)");
 
         ordersBtn.setText("Order Status");
         ordersBtn.addActionListener(this::ordersBtnActionPerformed);
-
-        javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
-        contentPanel.setLayout(contentPanelLayout);
-        contentPanelLayout.setHorizontalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
-        );
-        contentPanelLayout.setVerticalGroup(
-            contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 247, Short.MAX_VALUE)
-        );
 
         searchField.setText("Search...");
         searchField.addActionListener(this::searchFieldActionPerformed);
@@ -128,56 +122,57 @@ public class AdminFrame extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(usersBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(prescriptionsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(medicinesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(searchField))
+                                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ordersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(ordersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(username)))
+                                .addGap(292, 292, 292)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                        .addComponent(username)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ordersBtn, searchBtn, usersBtn});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ordersBtn, usersBtn});
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {medicinesPanel, prescriptionsBtn});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(btnLogout)
-                    .addComponent(username))
+                    .addComponent(username)
+                    .addComponent(btnLogout))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(usersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(prescriptionsBtn)
-                            .addComponent(medicinesPanel)
-                            .addComponent(ordersBtn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usersBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(prescriptionsBtn)
+                        .addComponent(medicinesPanel)
+                        .addComponent(ordersBtn)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(searchBtn)
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {medicinesPanel, ordersBtn, prescriptionsBtn, searchBtn, searchField, usersBtn});
+
+        contentPanel.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -212,14 +207,14 @@ public class AdminFrame extends javax.swing.JFrame {
     adminPrescriptionsPanel = new AdminPrescriptionsPanel();
 
     contentPanel.removeAll();
-    contentPanel.setLayout(new java.awt.BorderLayout());
+  contentPanel.setLayout(new java.awt.BorderLayout());
     contentPanel.add(adminPrescriptionsPanel);
 
     contentPanel.revalidate();
     contentPanel.repaint();
 
     activePanel = adminPrescriptionsPanel;
-;
+
      searchField.setVisible(true);
     searchField.setText("Search for prescriptions...");
     searchBtn.setVisible(true);
@@ -252,7 +247,7 @@ public class AdminFrame extends javax.swing.JFrame {
         adminOrdersPanel = new AdminOrdersPanel();
 
         contentPanel.removeAll();
-        contentPanel.setLayout(new java.awt.BorderLayout());
+      
         contentPanel.add( adminOrdersPanel, java.awt.BorderLayout.CENTER);
 
         contentPanel.revalidate();
@@ -269,8 +264,8 @@ public class AdminFrame extends javax.swing.JFrame {
         pharmacistsMedicinesPanel = new PharmacistsMedicinesPanel();
 
         contentPanel.removeAll();
-        contentPanel.setLayout(new java.awt.BorderLayout());
-        contentPanel.add(pharmacistsMedicinesPanel);
+     contentPanel.setLayout(new java.awt.BorderLayout());
+        contentPanel.add(pharmacistsMedicinesPanel, java.awt.BorderLayout.CENTER);
 
         contentPanel.revalidate();
         contentPanel.repaint();

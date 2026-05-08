@@ -26,6 +26,7 @@ public class PatientFrame extends javax.swing.JFrame {
     public PatientFrame() {
         initComponents();
         pack();
+        setMinimumSize(new java.awt.Dimension(900, 500));
         setLocationRelativeTo(null);
         username.setText(DataStore.currentUserName);
         searchField.setVisible(false);
@@ -64,12 +65,14 @@ public class PatientFrame extends javax.swing.JFrame {
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 249, Short.MAX_VALUE)
+            .addGap(0, 335, Short.MAX_VALUE)
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
         jLabel1.setText("Patient's Dashboard");
 
+        username.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 12)); // NOI18N
         username.setText("Patient (name)");
 
         btnMyProfile.setText("My Profile");
@@ -81,6 +84,7 @@ public class PatientFrame extends javax.swing.JFrame {
         btnMyOrders.setText("My Orders");
         btnMyOrders.addActionListener(this::btnMyOrdersActionPerformed);
 
+        btnLogout.setForeground(new java.awt.Color(255, 51, 51));
         btnLogout.setText("Logout");
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
 
@@ -100,7 +104,7 @@ public class PatientFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 346, Short.MAX_VALUE)
                         .addComponent(username)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,7 +121,7 @@ public class PatientFrame extends javax.swing.JFrame {
                                 .addComponent(btnMyOrders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(searchField))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)))
+                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnMyOrders, btnMyPrescriptions, btnMyProfile});
@@ -125,7 +129,7 @@ public class PatientFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(username)
@@ -141,7 +145,7 @@ public class PatientFrame extends javax.swing.JFrame {
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -162,8 +166,9 @@ public class PatientFrame extends javax.swing.JFrame {
     searchField.setVisible(false);
     searchBtn.setVisible(false);
     
-
-    this.pack();
+ activePanel = profilePanel;
+ 
+ this.pack();
     }//GEN-LAST:event_btnMyProfileActionPerformed
 
     private void btnMyPrescriptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyPrescriptionsActionPerformed
