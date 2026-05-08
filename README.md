@@ -43,12 +43,6 @@ The **E-Pharmacy System** is a desktop application designed to streamline pharma
 - Write medical prescriptions with medicine, dosage, and instructions
 - View patient medical history and existing prescriptions
 
-### Nurse
-
-- Place medicine orders based on prescriptions
-- Track order status and availability
-- Manage patient order requests
-
 ### Patient
 
 - View personal medical record and medical history
