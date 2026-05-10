@@ -48,6 +48,7 @@ public class AddMedicineDialog extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Create New Medicine Form");
 
         btnSave.setText("Save");
         btnSave.addActionListener(this::btnSaveActionPerformed);

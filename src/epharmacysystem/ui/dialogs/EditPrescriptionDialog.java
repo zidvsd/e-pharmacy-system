@@ -129,6 +129,7 @@ public class EditPrescriptionDialog extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit Prescription Form");
 
         jLabel1.setText("Patient Name:");
 

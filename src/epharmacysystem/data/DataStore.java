@@ -47,7 +47,7 @@ public class DataStore {
     public static final String ROLE_DOCTOR = "doctor";
     public static final String ROLE_PATIENT = "patient";
     public static final String ROLE_PHARMACIST = "pharmacist";
-    
+    public static final String ROLE_NURSE = "nurse";
     public static DataStore instance;
 
     // ================= INITIAL DATA BLOCK =================
@@ -64,9 +64,9 @@ public class DataStore {
         users[4] = new String[]{"u005", "pharmacist1", "pass123", ROLE_PHARMACIST, "Pharmacist John"};
         // Added Admin Role
         users[5] = new String[]{"u006", "admin", "admin123", ROLE_ADMIN, "System Administrator"};
-        
-        userCount = 6;
-        userIdCounter = 7;
+        users[6] = new String[]{"u007", "nurse", "pass123", ROLE_NURSE, "Nurse Joy"};
+        userCount = 7;
+        userIdCounter = 8;
 
         // Patients
         patients[0] = new String[]{"P001", "Juan Dela Cruz", "45", "Male", "Ward A", "Diabetes", "u003", "u001"};

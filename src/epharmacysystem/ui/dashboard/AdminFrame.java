@@ -77,6 +77,7 @@ public class AdminFrame extends javax.swing.JFrame {
         searchBtn1.addActionListener(this::searchBtn1ActionPerformed);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Admin's Dashboard");
         setPreferredSize(new java.awt.Dimension(685, 413));
 
         jLabel1.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 18)); // NOI18N

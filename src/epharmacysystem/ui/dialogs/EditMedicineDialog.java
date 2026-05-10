@@ -72,6 +72,7 @@ public class EditMedicineDialog extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit Medicine Form");
 
         btnSave.setText("Save");
         btnSave.addActionListener(this::btnSaveActionPerformed);

@@ -53,6 +53,7 @@ public class PatientFrame extends javax.swing.JFrame {
         searchField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Patient's Frame");
 
         contentPanel.setPreferredSize(new java.awt.Dimension(0, 300));
         contentPanel.setRequestFocusEnabled(false);

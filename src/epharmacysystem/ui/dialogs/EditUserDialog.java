@@ -107,6 +107,7 @@ public class EditUserDialog extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit User Form");
 
         txtFullName.setColumns(30);
         txtFullName.setToolTipText("");

@@ -198,7 +198,7 @@ public class AddPatientDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelActionPerformed
     
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-     String name = txtName.getText().trim();
+    String name = txtName.getText().trim();
     String ageStr = txtAge.getText().trim();
     String ward = txtWard.getText().trim();
     String history = txtHistory.getText().trim();
@@ -230,16 +230,17 @@ public class AddPatientDialog extends javax.swing.JDialog {
 
     // ===== START SAVE LOGIC =====
     String patientId = String.format("P%03d", DataStore.patientIdCounter);
-    String userId = "u" + String.format("%03d", DataStore.users.length + 1);
+    String userId = "u" + String.format("%03d", DataStore.userIdCounter);
     String username = name.replace(" ", "").toLowerCase();
     String password = "pass123";
 
-    // Update Users Array
-    DataStore.users = java.util.Arrays.copyOf(DataStore.users, DataStore.users.length + 1);
-    DataStore.users[DataStore.users.length - 1] = new String[]{
+ 
+    DataStore.users[DataStore.userCount] = new String[]{
         userId, username, password, "patient", name
     };
-     
+    DataStore.userCount++;
+    DataStore.userIdCounter++;
+    
     // Update Patients Array
     DataStore.patients[DataStore.patientCount] = new String[]{
         patientId, name, ageStr, cmbGender.getSelectedItem().toString(), 
@@ -249,11 +250,32 @@ public class AddPatientDialog extends javax.swing.JDialog {
     DataStore.patientCount++;
     DataStore.patientIdCounter++;
 
-    javax.swing.JOptionPane.showMessageDialog(this, "Patient added successfully!");
-    this.dispose();
+    
+    
+    
+     javax.swing.JOptionPane.showMessageDialog(this,
+        "Patient added successfully!\nUsername: " + username + "\nPassword: " + password
+    );    
+     java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DataStore.class.getName());
+    StringBuilder sb = new StringBuilder();
+    sb.append("\n====== CURRENT DATASTORE USERS (").append(DataStore.userCount).append(") ======\n");
+    sb.append(String.format("%-8s %-15s %-12s %-12s %-20s%n", "ID", "Username", "Password", "Role", "Name"));
+    sb.append("-".repeat(70)).append("\n");
+    for (int i = 0; i < DataStore.userCount; i++) {
+        if (DataStore.users[i] != null) {
+            sb.append(String.format("%-8s %-15s %-12s %-12s %-20s%n",
+                DataStore.users[i][0], DataStore.users[i][1], DataStore.users[i][2], DataStore.users[i][3], DataStore.users[i][4]
+            ));
+        }
+    }
+    sb.append("=".repeat(70));
+    logger.log(java.util.logging.Level.INFO, sb.toString());
+     
+     this.dispose();
  
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */

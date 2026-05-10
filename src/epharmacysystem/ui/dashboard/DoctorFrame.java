@@ -67,6 +67,7 @@ public class DoctorFrame extends javax.swing.JFrame {
         searchBtn1.addActionListener(this::searchBtn1ActionPerformed);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Doctor's Dashboard");
 
         jLabel1.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));

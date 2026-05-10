@@ -54,6 +54,7 @@ public class PharmacistFrame extends javax.swing.JFrame {
         medicinesPanel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pharmacist's Dashboard");
 
         jLabel1.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));

@@ -9,6 +9,7 @@ import epharmacysystem.ui.dashboard.PatientFrame;
 import epharmacysystem.ui.dashboard.PharmacistFrame;
 import epharmacysystem.data.DataStore;
 import epharmacysystem.ui.dashboard.AdminFrame;
+import epharmacysystem.ui.dashboard.NurseFrame;
 
 /**
  *
@@ -47,6 +48,7 @@ public class LoginFrame extends javax.swing.JFrame {
         chkShowPassword = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
 
         jLabel4.setFont(new java.awt.Font("Inter 18pt SemiBold", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -169,7 +171,10 @@ public class LoginFrame extends javax.swing.JFrame {
                         break;
                     case DataStore.ROLE_ADMIN:
                         new AdminFrame().setVisible(true);
-                        break;    
+                        break;
+                    case DataStore.ROLE_NURSE:
+                        new NurseFrame().setVisible(true);
+                        break; 
                     default:
                         break;
                 }

@@ -58,6 +58,7 @@ public class AddUserDialog extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add User Form ");
 
         btnSave.setText("Save");
         btnSave.addActionListener(this::btnSaveActionPerformed);
@@ -83,7 +84,7 @@ public class AddUserDialog extends javax.swing.JDialog {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("CREATE NEW USER");
 
-        cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "patient", "pharmacist", "doctor", "admin" }));
+        cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "patient", "pharmacist", "doctor", "admin", "nurse" }));
         cmbRole.addActionListener(this::cmbRoleActionPerformed);
 
         cmbAssignedDoctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dr." }));

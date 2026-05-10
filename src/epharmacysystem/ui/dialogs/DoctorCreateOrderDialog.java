@@ -59,6 +59,7 @@ public class DoctorCreateOrderDialog extends javax.swing.JDialog {
         btnPlaceOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Create Order Form");
 
         jLabel3.setText("Prescription:");
 

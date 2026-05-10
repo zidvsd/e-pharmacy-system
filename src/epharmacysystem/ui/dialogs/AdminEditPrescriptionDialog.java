@@ -108,6 +108,7 @@ public class AdminEditPrescriptionDialog extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit Prescription Form");
 
         jLabel1.setText("Patient Name:");
 

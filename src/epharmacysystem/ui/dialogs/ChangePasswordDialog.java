@@ -58,6 +58,7 @@ public class ChangePasswordDialog extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Change Password Form");
 
         txtOldPassword.setText("jPasswordField1");
 

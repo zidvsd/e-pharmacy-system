@@ -70,6 +70,7 @@ public class EditPatientDialog extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit Patient Form");
 
         txtName.setColumns(30);
         txtName.setToolTipText("");
