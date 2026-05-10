@@ -3,7 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/data/DataStore.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dashboard/PatientFrame.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/DoctorsPatientsPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/MyProfilePanel.java</file>
@@ -15,14 +14,12 @@
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/ViewOrderDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/auth/LoginFrame.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dashboard/PharmacistFrame.java</file>
-            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/DoctorsPrescriptionsPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/DoctorsOrdersPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/MyOrdersPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/ViewPrescriptionDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/PharmacistsPrescriptionsPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/PharmacistsMedicinesPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/AddMedicineDialog.java</file>
-            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dashboard/DoctorFrame.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/EditMedicineDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/PharmacistsOrdersPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/EditOrderStatusDialog.java</file>
@@ -38,6 +35,7 @@
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/AdminPrescriptionsPanel.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/AdminEditPrescriptionDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/main/EPharmacySystem.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/auth/login-icon.png</file>
         </group>
     </open-files>
 </project-private>
