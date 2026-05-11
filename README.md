@@ -287,40 +287,101 @@ The following features are planned for future releases:
 - See [CODEBASE_DESCRIPTION.md](CODEBASE_DESCRIPTION.md) for detailed technical information about the project structure and current implementation status
 - See [PHARMACIST_ROLE_GUIDE.md](PHARMACIST_ROLE_GUIDE.md) for information specific to pharmacist features
 
-### Common Issues
+### Development Notes
+
+- **Data Model**: The system currently uses in-memory arrays (DataStore.java) with no persistent database
+- **UI Framework**: All UI components are built with Java Swing and NetBeans GUI Builder
+- **Sample Data**: The application initializes with pre-loaded sample users, patients, and medicines
+- **Thread Safety**: Current implementation is single-threaded; consider thread safety when adding concurrent features
+- **Code Organization**: Follow the existing package structure (main, data, ui/auth, ui/dashboard, ui/dialogs, ui/panels)
+
+### Quick Start for Each Role
+
+After logging in with your role's credentials, here's what you can explore:
+
+**Doctor** (drjuan / pass123)
+
+- Access patient records
+- Create and manage prescriptions
+- View order status from pharmacists
+
+**Nurse** (nursealex / pass789)
+
+- View available patients and prescriptions
+- Create medicine orders for patient prescriptions
+- Track order approval progress
+
+**Patient** (patjohn / pass123)
+
+- View your personal medical record
+- Check your current prescriptions
+- Monitor medicine order statuses
+
+**Pharmacist** (pharmsarah / pass123)
+
+- Review and approve/reject medicine orders
+- Manage medicine inventory (add, edit, delete medicines)
+- Update stock quantities and pricing
+
+**Admin** (admin / admin123)
+
+- Manage all system users
+- View system-wide reports
+- Perform administrative overrides if needed
 
 **Build fails in NetBeans:**
 
-- Ensure Java compiler version matches project configuration
+- Ensure Java compiler version matches project configuration (JDK 8 or higher)
 - Check NetBeans project properties: Right-click project → Properties → Sources
+- Clean build: Right-click project → Clean and Build
+- Clear NetBeans cache: Delete the `build/` folder manually and rebuild
 
 **Application won't start:**
 
-- Verify Java is properly installed: `java -version`
-- Check for errors in the Output window in NetBeans
+- Verify Java is properly installed: `java -version` (should be 8 or higher)
+- Check for compilation errors in the Output window in NetBeans
+- Ensure `EPharmacySystem.java` is marked as the main entry point
 
 **Login credentials not working:**
 
-- Use the exact sample credentials provided in the Installation section above
-- Check that the DataStore is properly initialized in the main application
+- Ensure you're using the exact sample credentials from the credentials table above
+- Verify that the username field contains the username (not full name)
+- Check that DataStore is being initialized properly when the application starts
+- Note: Currently, login validation may still be under development - check the console for error messages
+
+**Data not persisting after closing the app:**
+
+- This is expected behavior - the system currently uses in-memory arrays only
+- All data is reset when you close and reopen the application
+- This is by design for the current development version (database persistence is a planned feature)
+
+**Form files not displaying correctly:**
+
+- Ensure NetBeans GUI Builder is properly installed
+- Do not manually edit .form files - only edit through the NetBeans visual editor
+- If forms appear corrupted, rebuild the project: Right-click project → Clean and Build
 
 ## Project Status
 
 This project is in **active development**. The following components are complete:
 
-- Application skeleton and basic UI
-- Role-based frame structure
-- Sample data initialization
-- NetBeans form files for all UI components
+- ✅ Application skeleton and basic UI framework
+- ✅ Role-based frame structure for all five user roles
+- ✅ Sample data initialization with default users and records
+- ✅ NetBeans form files for all UI components
+- ✅ Data structure arrays for Users, Patients, Prescriptions, Orders, and Medicines
+- ✅ UI dialog files for major workflows (Add/Edit operations)
 
 The following components are **in progress or not yet implemented**:
 
-- Full CRUD operations for all entities
-- Login validation and RBAC routing
-- Order approval workflow
-- Medicine inventory management logic
-- Form data binding and validation
-- Error handling and user feedback
+- 🔄 Full CRUD operations for all entities
+- 🔄 Login validation logic and RBAC routing
+- 🔄 Order approval and status management workflow
+- 🔄 Medicine inventory tracking and stock management
+- ❌ Persistent data storage (currently in-memory only)
+- ❌ Form data binding and real-time validation
+- ❌ Comprehensive error handling and user feedback
+- ❌ Email notifications and system alerts
 
 ## Author
 
@@ -332,6 +393,6 @@ This project is provided as-is for educational purposes. See [LICENSE](LICENSE) 
 
 ---
 
-**Last Updated**: May 2026
+**Last Updated**: May 10, 2026
 
-For the latest project updates and issues, please visit the [project repository](#).
+For the latest project updates, please check the project source repository.

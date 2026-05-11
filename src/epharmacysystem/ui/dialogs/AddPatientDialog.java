@@ -20,7 +20,6 @@ public class AddPatientDialog extends javax.swing.JDialog {
      */
     public AddPatientDialog(java.awt.Frame parent, boolean modal, DataStore ds) {
         super(parent, modal);
-     
         initComponents();
     }
 

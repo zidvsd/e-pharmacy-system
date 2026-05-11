@@ -36,6 +36,17 @@
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dialogs/AdminEditPrescriptionDialog.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/main/EPharmacySystem.java</file>
             <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/auth/login-icon.png</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/resources/images/login-icon.png</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/resources/images/multiple-users-silhouette.png</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/resources/images/search-interface-symbol.png</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/resources/images/user.png</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dashboard/DoctorFrame.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/DoctorsPrescriptionsPanel.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/dashboard/NurseFrame.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/NursePatientsPanel.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/NurseOrdersPanel.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/ui/panels/NursePrescriptionsPanel.java</file>
+            <file>file:/C:/Users/Zid/Documents/NetBeansProjects/EPharmacySystem/src/epharmacysystem/data/DataStore.java</file>
         </group>
     </open-files>
 </project-private>
