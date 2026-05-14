@@ -219,19 +219,29 @@ public class NurseFrame extends javax.swing.JFrame {
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
     String text = searchField.getText();
 
-    if (activePanel instanceof AdminUsersPanel) {
-        ((AdminUsersPanel) activePanel).filterTable(text);
+    if (activePanel instanceof NursePatientsPanel) {
+        ((NursePatientsPanel) activePanel).filterTable(text);
     } 
-     else if(activePanel instanceof  PharmacistsMedicinesPanel ) {
-        ((PharmacistsMedicinesPanel) activePanel).filterTable(text);
+     else if(activePanel instanceof  NursePrescriptionsPanel ) {
+        ((NursePrescriptionsPanel) activePanel).filterTable(text);
     } 
-    else if(activePanel instanceof  AdminOrdersPanel) {
-        ((AdminOrdersPanel) activePanel).filterTable(text);
+    else if(activePanel instanceof  NurseOrdersPanel) {
+        ((NurseOrdersPanel) activePanel).filterTable(text);
     } 
     }//GEN-LAST:event_searchBtnActionPerformed
 
     private void searchBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn1ActionPerformed
-      
+       String text = searchField.getText();
+
+    if (activePanel instanceof DoctorsPatientsPanel) {
+        ((DoctorsPatientsPanel) activePanel).filterTable(text);
+    } 
+    else if(activePanel instanceof DoctorsPrescriptionsPanel) {
+        ((DoctorsPrescriptionsPanel) activePanel).filterTable(text);
+    } 
+    else if(activePanel instanceof DoctorsOrdersPanel) {
+        ((DoctorsOrdersPanel) activePanel).filterTable(text);
+    } 
     }//GEN-LAST:event_searchBtn1ActionPerformed
 
     private void ordersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordersBtnActionPerformed
